@@ -1,11 +1,13 @@
 /**
  * Config
+ *
+ * see doc:
  */
 
-CDN_DOMAIN          =   localStorage.CDN_DOMAIN ? localStorage.CDN_DOMAIN : 'http://public.hey-community.cn';
+API_APP             =   'http://demo.hey-community.cn/api';             // app use the api
+API_WEBAPP          =   "it's will be auto get from URL";               // webApp use the api
 
-API_PRODUCT         =   localStorage.API_PRODUCT ? localStorage.API_PRODUCT : 'http://demo.hey-community.cn';
-API_DEVING          =   localStorage.API_DEVING ? localStorage.API_DEVING : 'http://demo.hey-community.local';
+CDN_DOMAIN          =   'please use qiniu.com';                         // the cdn, app env is need
 
 
 
@@ -16,22 +18,25 @@ API_DEVING          =   localStorage.API_DEVING ? localStorage.API_DEVING : 'htt
 
 
 // auto set API
-if (getParameterByName('env') === 'deving') {
-    API         =   API_DEVING;
-    CDN_DOMAIN  =   API_DEVING;
-} else if (getParameterByName('env') === 'testing') {
-    API     =   API_PRODUCT;
-} else {
-    if (window.location.protocol == 'http:' || window.location.protocol == 'https:') {
-        API     =   window.location.protocol + '//' + window.location.hostname;
+if (window.location.protocol == 'http:' || window.location.protocol == 'https:') {
+    // set API
+    if (API_WEBAPP.substring(0, 4) == 'http') {
+        API     =   API_WEBAPP;
     } else {
-        API     =   API_PRODUCT;
+        API     =   window.location.protocol + '//' + window.location.hostname + '/api';
     }
-}
 
-if (getParameterByName('api')) {
-    API = 'http://' + getParameterByName('api');
+
+    // set CDN
+    if (getParameterByName('env') === undefined && CDN_DOMAIN.substring(0, 4) == 'http') {
+        CDN =   CDN_DOMAIN;
+    } else {
+        CDN =   window.location.protocol + '//' + window.location.hostname;
+    }
+} else {
+    API     =   API_APP;
+    CDN     =   CDN_DOMAIN;
 }
 
 console.debug('the API is: ' + API);
-console.debug('the CDN_DOMAIN is: ' + CDN_DOMAIN);
+console.debug('the CDN is: ' + CDN);
