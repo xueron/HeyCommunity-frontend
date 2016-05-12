@@ -121,11 +121,16 @@ HeyCommunity
         SIGN_OFF:               'Sign Off',
 
 
+
         //
         // Account Security
         // -------------------------------
         CHANGE_PWD:             'Change Password',
-        NEW_PASSWORD:             'New Password',
+        OLD_PASSWORD:           'Old Password',
+        NEW_PASSWORD:           'New Password',
+        NEW_PASSWORD_CONFIRM:   'Confirm New Password',
+
+
 
         //
         // Topic Tab

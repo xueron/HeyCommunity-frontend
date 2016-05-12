@@ -184,7 +184,17 @@ HeyCommunity
         views: {
             'menuContent': {
                 templateUrl: 'templates/user/user-setup-accountSecurity.html',
-                controller: 'AccountSecurityCtrl'
+                controller: 'UserAccountSecurityCtrl'
+            }
+        }
+    })
+
+    .state('hey.user-setup-accountSecurity-changePassword', {
+        url: '/user/user-setup-accountSecurity-changePassword',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/user/user-setup-accountSecurity-changePassword.html',
+                controller: 'UserChangePasswordCtrl'
             }
         }
     })

@@ -1,12 +1,12 @@
 <ion-view view-title="{{'ACCOUNT_SECURITY'| translate }}">
     <ion-content id="module-user" class="page-user-setup-softInfo">
         <div class="padding">
-          <div class="list">
-            <a class="item item-icon-left" ng-click="changePwdModal.show()">
-              <i class="icon ion-android-cloud"></i>
-              {{ 'CHANGE_PWD' | translate }}
+        </div>
+        <div class="list">
+            <a class="item item-icon-left" ui-sref="hey.user-setup-accountSecurity-changePassword">
+                <i class="icon ion-ios-locked"></i>
+                {{ 'CHANGE_PWD' | translate }}
             </a>
-          </div>
         </div>
     </ion-content>
 </ion-view>

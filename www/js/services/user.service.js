@@ -1,6 +1,10 @@
 HeyCommunity
 
 .service('UserService', ['$http', '$rootScope', function($http, $rootScope) {
+    var self = this;
+
+    self.changePasswordErrors = [];
+
     // sign up verify
     this.signUpVerifyCaptcha = function(params) {
         var q = $http.post(getApiUrl('/user/sign-up-verify-captcha'), params);
@@ -86,6 +90,16 @@ HeyCommunity
             UtilityService.showNoticeFail();
         });
         return q;
+    }
+
+    // user change password
+    this.changePassword = function()
+    {
+         q = $http.get(getApiUrl('/user/change-password'));
+         q.then(function() {
+         }, function() {
+         });
+         self.changePasswordErrors = [1,2,3,4];
     }
 
 

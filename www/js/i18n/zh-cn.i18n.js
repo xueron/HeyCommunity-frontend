@@ -120,11 +120,17 @@ HeyCommunity
         CLEAR_CACHE:            '清空缓存',
         SIGN_OFF:               '退出登录',
 
-//
+
+
+        //
         // Account Security
         // -------------------------------
         CHANGE_PWD:             '修改密码',
+        OLD_PASSWORD:           '旧密码',
         NEW_PASSWORD:           '新密码',
+        NEW_PASSWORD_CONFIRM:   '重复新密码',
+
+
 
         //
         // Topic Tab

@@ -153,11 +153,19 @@ HeyCommunity
 
 
 
-.controller('AccountSecurityCtrl', ['$scope', 'UserService', function($scope, UserService) {
-    $scope.change_pwd = function(){
-      localStorage.timelines = '';
-    }
-  }])
+// hey.user-setup-accountSecurity
+.controller('UserAccountSecurityCtrl', ['$scope', 'UserService', function($scope, UserService) {
+}])
+
+
+
+// hey.user-setup-accountSecurity-changePassword
+.controller('UserChangePasswordCtrl', ['$scope', 'UserService', function($scope, UserService) {
+    $scope.UserService = UserService;
+    $scope.UserService.changePasswordErrors = [];
+}])
+
+
 
 // tab.user-setup-general-language
 .controller('UserSetupGeneralLanguageCtrl', ['$scope', 'UserService', '$translate', function($scope, UserService, $translate) {
