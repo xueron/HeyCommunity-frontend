@@ -117,7 +117,20 @@ HeyCommunity
         PRIVACY:                '隐私',
         FEEDBACK:               '建议反馈',
         SOFT_INFO:              '软件信息',
+        CLEAR_CACHE:            '清空缓存',
         SIGN_OFF:               '退出登录',
+
+
+
+        //
+        // Account Security
+        // -------------------------------
+        CHANGE_PWD:             '修改密码',
+        OLD_PASSWORD:           '旧密码',
+        NEW_PASSWORD:           '新密码',
+        NEW_PASSWORD_CONFIRM:   '重复新密码',
+        FORGOT_PASSWORD:        '找回密码',
+        RESET_PASSWORD:         '重设密码',
 
 
 

@@ -76,20 +76,6 @@ HeyCommunity
 
 
 
-// tab.user-signOut
-.controller('UserSignOutCtrl', ['$scope', 'UserService', '$ionicHistory', function($scope, UserService, $ionicHistory) {
-    UserService.signOut().then(function(response) {
-        if (response.status === 200) {
-            $ionicHistory.clearCache();
-            $scope.state.go('hey.user');
-        } else {
-            $scope.state.go('hey.user-setup');
-        }
-    });
-}])
-
-
-
 // tab.user-info
 .controller('UserInfoCtrl', ['$scope', 'UserService', function($scope, UserService) {
     if ($scope.stateParams.id != $scope.$root.userInfo.id) {
@@ -140,9 +126,65 @@ HeyCommunity
 
 
 
-// tab.user-setup
-.controller('UserSetupCtrl', ['$scope', 'UserService', function($scope, UserService) {
+// hey.user-setup
+.controller('UserSetupCtrl', ['$scope', 'UserService', '$ionicHistory', function($scope, UserService, $ionicHistory) {
+    //
+    $scope.clearCache = function(){
+        localStorage.removeItem('timelines');
+        localStorage.removeItem('timelineLikes');
+        localStorage.removeItem('topics');
+        localStorage.removeItem('user');
+        localStorage.removeItem('tenantInfo');
+        $scope.utility.showNoticeSuccess();
+    }
+
+    //
+    $scope.signOut = function() {
+        UserService.signOut().then(function(response) {
+            if (response.status === 200) {
+                $ionicHistory.clearCache();
+                $scope.state.go('hey.user');
+            } else {
+                $scope.utility.showNoticeFail();
+            }
+        });
+    }
 }])
+
+
+
+// hey.user-setup-accountSecurity
+.controller('UserAccountSecurityCtrl', ['$scope', 'UserService', function($scope, UserService) {
+}])
+
+
+
+// hey.user-setup-accountSecurity-changePassword
+.controller('UserChangePasswordCtrl', ['$scope', 'UserService', function($scope, UserService) {
+    $scope.UserService = UserService;
+    $scope.setNewPasswordForm = {};
+
+    //
+    $scope.setNewPassword = function() {
+        var params = {
+            'old_password': $scope.setNewPasswordForm.old_password,
+            'new_password': $scope.setNewPasswordForm.new_password,
+        };
+        $scope.UserService.setNewPassword(params).then(function(response) {
+            if (response.status === 200) {
+                $scope.utility.showNoticeText('SET_NEW_PASSWORD_SUCCESS_PLEASE_RELOGIN');
+                $scope.UserService.signOut();
+                $scope.UserService.signOut();
+
+                $scope.timeout(function() {
+                    $scope.state.go('hey.user');
+                }, 1000);
+            }
+        }, function() {
+        });
+    }
+}])
+
 
 
 // tab.user-setup-general-language

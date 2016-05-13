@@ -129,16 +129,6 @@ HeyCommunity
         }
     })
 
-    .state('hey.user-signOut', {
-        cache: false,
-        url: '/user/signOut',
-        views: {
-            'menuContent': {
-                controller: 'UserSignOutCtrl'
-            }
-        }
-    })
-
     .state('hey.user-info', {
         url: '/user/user-info/:id',
         views: {
@@ -194,6 +184,17 @@ HeyCommunity
         views: {
             'menuContent': {
                 templateUrl: 'templates/user/user-setup-accountSecurity.html',
+                controller: 'UserAccountSecurityCtrl'
+            }
+        }
+    })
+
+    .state('hey.user-setup-accountSecurity-changePassword', {
+        url: '/user/user-setup-accountSecurity-changePassword',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/user/user-setup-accountSecurity-changePassword.html',
+                controller: 'UserChangePasswordCtrl'
             }
         }
     })

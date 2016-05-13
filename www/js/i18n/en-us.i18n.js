@@ -117,7 +117,20 @@ HeyCommunity
         PRIVACY:                'Privacy',
         FEEDBACK:               'Feedback',
         SOFT_INFO:              'More Information',
+        CLEAR_CACHE:            'Clear Cache',
         SIGN_OFF:               'Sign Off',
+
+
+
+        //
+        // Account Security
+        // -------------------------------
+        CHANGE_PWD:             'Change Password',
+        OLD_PASSWORD:           'Old Password',
+        NEW_PASSWORD:           'New Password',
+        NEW_PASSWORD_CONFIRM:   'Confirm New Password',
+        FORGOT_PASSWORD:        'Forgot Password',
+        RESET_PASSWORD:         'Reset Password',
 
 
 

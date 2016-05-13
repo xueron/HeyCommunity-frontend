@@ -26,13 +26,6 @@
     "ionic-plugin-keyboard",
     "cordova-plugin-whitelist",
     "cordova-plugin-badge",
-    {
-      "variables": {
-        "API_KEY": "e47df424e495418bcd4c5cdc"
-      },
-      "locator": "https://github.com/jpush/jpush-phonegap-plugin.git",
-      "id": "cn.jpush.phonegap.JPushPlugin"
-    },
     "org.apache.cordova.device",
     "cordova-plugin-dialogs",
     "cordova-plugin-inappbrowser"
