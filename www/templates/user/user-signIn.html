@@ -7,27 +7,79 @@
     </ion-header-bar>
 
     <ion-content id="module-user" class="page-signin">
-        <div class="padding">
+        <div class="padding" ng-if="UserSignInService.isSignInPanel">
             <p class="h5">{{ 'WELCOME_COME_BACK' | translate }}{{ tenantInfo.site_name }}</p>
 
-            <form name="ngForm" ng-submit="UserSignInService.signIn()">
+            <form name="ngFormSignIn" ng-submit="UserSignInService.signIn()">
                 <div class="list">
                     <label class="item item-input">
                         <span class="input-label">{{ 'PHONE' | translate }}</span>
-                        <input ng-model="UserSignInService.phone" required ng-minlength="11" type="number" placeholder="">
+                        <input ng-model="UserSignInService.phone" name="phone" required ng-minlength="11" type="number" placeholder="">
                     </label>
                     <label class="item item-input">
                         <span class="input-label">{{ 'PASSWORD' | translate }}</span>
-                        <input ng-model="UserSignInService.password" required ng-minlength="6" type="password" placeholder="">
+                        <input ng-model="UserSignInService.password" name="password" required ng-minlength="6" type="password" placeholder="">
                     </label>
                 </div>
 
-                <button ng-disabled="ngForm.$invalid" class="button button-block">{{ 'SIGN_IN' | translate }}</button>
+                <button ng-disabled="ngFormSignIn.$invalid" class="button button-block">{{ 'SIGN_IN' | translate }}</button>
             </form>
 
             <div style="margin-top:4px;">
-                <a ng-click="forgetPwdModal.show();signInModal.hide();">{{ 'FORGET_PASSWORD' | translate }}</a>
+                <a ng-click="UserSignInService.goToForgotPanel();">{{ 'FORGET_PASSWORD' | translate }}</a>
                 <a ng-click="signUpModal.show();signInModal.hide();" todo-ui-sref="hey.user-signUp" class="pull-right">{{ 'SIGN_UP' | translate }}</a>
+            </div>
+        </div>
+
+
+        <!-- -->
+        <div class="padding" ng-if="UserSignInService.isForgotPanel">
+            <p class="h5">{{ 'FORGOT_PASSWORD' | translate }}</p>
+
+            <form name="ngFormForgotPassword" ng-submit="UserSignInService.forgotVerifyCaptcha()">
+                <div class="list">
+                    <label class="item item-input">
+                        <span class="input-label">{{ 'PHONE' | translate }}</span>
+                        <input ng-model="UserSignInService.phone" name="phone" required ng-minlength="11" type="number" placeholder="">
+                    </label>
+
+                    <label class="item item-input">
+                        <span class="input-label">{{ 'CAPTCHA' | translate }}</span>
+                        <button type="button" ng-disabled="UserSignInService.phone.$invalid" 
+                            style="position:absolute; right:10px;" class="button button-small" 
+                            ng-click="CaptchaService.getCaptcha({phone: UserSignInService.phone})">
+                            {{ CaptchaService.getCaptchaBtnText | translate }}
+                        </button>
+                        <input ng-model="UserSignInService.captcha" name="captcha" type="text" required ng-minlength="6">
+                    </label>
+                </div>
+
+                <button todo-ng-disabled="ngFormForgotPassword.$invalid" class="button button-block">{{ 'NEXT' | translate }}</button>
+            </form>
+
+            <div style="margin-top:4px;">
+                <a ng-click="UserSignInService.goToSignInPanel()" class="pull-right">{{ 'SIGN_IN' | translate }}</a>
+            </div>
+        </div>
+
+
+        <!-- -->
+        <div class="padding" ng-if="UserSignInService.isResetPasswordPanel">
+            <p class="h5">{{ 'FORGOT_PASSWORD' | translate }}</p>
+
+            <form name="ngFormResetPassword" ng-submit="UserSignInService.resetPassword()">
+                <div class="list">
+                    <label class="item item-input">
+                        <span class="input-label">{{ 'PASSWORD' | translate }}</span>
+                        <input ng-model="UserSignInService.newPassword" name="password" required ng-minlength="6" type="password" placeholder="">
+                    </label>
+                </div>
+
+                <button ng-disabled="ngFormResetPassword.$invalid" class="button button-block">{{ 'RESET_PASSWORD' | translate }}</button>
+            </form>
+
+            <div style="margin-top:4px;">
+                <a ng-click="UserSignInService.goToSignInPanel()" class="pull-right">{{ 'SIGN_IN' | translate }}</a>
             </div>
         </div>
     </ion-content>

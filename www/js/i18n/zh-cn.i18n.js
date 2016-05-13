@@ -129,6 +129,8 @@ HeyCommunity
         OLD_PASSWORD:           '旧密码',
         NEW_PASSWORD:           '新密码',
         NEW_PASSWORD_CONFIRM:   '重复新密码',
+        FORGOT_PASSWORD:        '找回密码',
+        RESET_PASSWORD:         '重设密码',
 
 
 

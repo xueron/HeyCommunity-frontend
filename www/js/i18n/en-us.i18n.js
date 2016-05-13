@@ -129,6 +129,8 @@ HeyCommunity
         OLD_PASSWORD:           'Old Password',
         NEW_PASSWORD:           'New Password',
         NEW_PASSWORD_CONFIRM:   'Confirm New Password',
+        FORGOT_PASSWORD:        'Forgot Password',
+        RESET_PASSWORD:         'Reset Password',
 
 
 
