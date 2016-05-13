@@ -162,7 +162,27 @@ HeyCommunity
 // hey.user-setup-accountSecurity-changePassword
 .controller('UserChangePasswordCtrl', ['$scope', 'UserService', function($scope, UserService) {
     $scope.UserService = UserService;
-    $scope.UserService.changePasswordErrors = [];
+    $scope.setNewPasswordForm = {};
+
+    //
+    $scope.setNewPassword = function() {
+        var params = {
+            'old_password': $scope.setNewPasswordForm.old_password,
+            'new_password': $scope.setNewPasswordForm.new_password,
+        };
+        $scope.UserService.setNewPassword(params).then(function(response) {
+            if (response.status === 200) {
+                $scope.utility.showNoticeText('SET_NEW_PASSWORD_SUCCESS_PLEASE_RELOGIN');
+                $scope.UserService.signOut();
+                $scope.UserService.signOut();
+
+                $scope.timeout(function() {
+                    $scope.state.go('hey.user');
+                }, 1000);
+            }
+        }, function() {
+        });
+    }
 }])
 
 
