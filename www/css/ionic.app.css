@@ -9496,6 +9496,18 @@ a.button {
     height: 60px;
     overflow: hidden; }
 
+#module-topic marked h1, #module-topic #marked h1 {
+  font-size: 20px; }
+
+#module-topic marked h2, #module-topic #marked h2 {
+  font-weight: 500; }
+
+#module-topic marked p, #module-topic #marked p {
+  color: #444; }
+
+#module-topic marked > p:first-child, #module-topic #marked > p:first-child {
+  margin-top: 0; }
+
 #module-user .hey-avatar img {
   width: 120px;
   height: 120px;
@@ -9515,6 +9527,6 @@ a {
 @media (min-width: 1025px) {
   body {
     margin: 0 auto; }
-  ion-header-bar, ion-tabs, .bottom-tabs, .tab-nav, ion-view {
+  ion-header-bar, ion-tabs, .bottom-tabs, .tab-nav, ion-view, ion-modal-view {
     margin: 0 auto;
     max-width: 500px; } }

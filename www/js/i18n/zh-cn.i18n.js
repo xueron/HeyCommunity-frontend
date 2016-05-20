@@ -104,8 +104,10 @@ HeyCommunity
         WHAT_IS_NEW:            '有什么新鲜事儿',
         PICTURE:                '图片',
         NEW_PHOTO:              '照片',
+        NEW_IMAGE:              '图片',
         NEW_VIDEO:              '小视频',
         LIKE_OR_COMMENT:        '共 {{ num }} 次喜欢或评论',
+        PLEASE_ADD_CONTENT_OR_IMAGE:    '请添加内容或图片',
 
 
 

@@ -72,7 +72,7 @@ HeyCommunity
         var hideSheet = $ionicActionSheet.show({
             titleText: $scope.filter('translate')('WHAT_IS_NEW'),
             buttons: [
-                {text: $scope.filter('translate')('NEW_PHOTO')},
+                {text: $scope.filter('translate')('NEW_IMAGE')},
                 // {text: $scope.filter('translate')('NEW_VIDEO')},
             ],
             cancelText: $scope.filter('translate')('CANCEL'),
@@ -104,7 +104,9 @@ HeyCommunity
     $scope.Timeline = {};
 
     $scope.store = function() {
-        if ($scope.Timeline.pic && $scope.Timeline.content) {
+        if (!$scope.Timeline.pic && !$scope.Timeline.content) {
+            $scope.utility.showNoticeText('PLEASE_ADD_CONTENT_OR_IMAGE', 1888);
+        } else {
             var params = {
                 attachment: $scope.Timeline.pic,
                 content: $scope.Timeline.content,
@@ -119,8 +121,6 @@ HeyCommunity
                     $scope.utility.showAlert({title: $scope.filter('translate')('ERROR'), content: response.data});
                 }
             });
-        } else {
-            return false;
         }
     }
 
@@ -181,23 +181,11 @@ HeyCommunity
             var params = {
                 id: id,
             }
-            console.debug('### TimelineService.like params', params);
             TimelineService.like(params).then(function(response) {
-                console.debug('### TimelineService.like response', response);
                 if (response.status == 200) {
-                    if ($scope.$root.TimelineService.timelines !== undefined) {
-                        $scope.filter('orderBy')(TimelineService.timelines, '-id')[timelineIndex] = response.data;
-                        $scope.Timeline = response.data;
-
-                        if ($scope.$root.TimelineService.isLike(id)) {
-                            var i = $scope.$root.TimelineService.timelineLikes.indexOf(response.data.id);
-                            $scope.$root.TimelineService.timelineLikes.splice(i, 1);
-                        } else {
-                            $scope.$root.TimelineService.timelineLikes.push(response.data.id);
-                        }
-                    }
+                    $scope.Timeline = response.data;
                 }
-            })
+            });
         }
     }
 
@@ -259,7 +247,7 @@ HeyCommunity
             },
         }
 
-        if ($scope.utility.isAdmin()) {
+        if ($scope.utility.isAdmin() || $scope.Timeline.user_id == $scope.userInfo.id) {
             config.destructiveText = $scope.filter('translate')('DESTROY');
         }
 

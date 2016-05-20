@@ -26,7 +26,7 @@ HeyCommunity
         UPDATE:             'Update',
         DELETE:             'Delete',
         DESTROY:            'Destroy',
-        SELECT:             'Select',
+        DESTROY_ALL:        'Destroy All',
         MARK_CHECKED_ALL:   'All Mark Checked',
         MARK_CHECKED:       'Mark Checked',
         SELECT:             'Select',
@@ -104,8 +104,10 @@ HeyCommunity
         WHAT_IS_NEW:            'What\'s new?',
         PICTURE:                'Picture',
         NEW_PHOTO:              'New Photo',
+        NEW_IMAGE:              'New Image',
         NEW_VIDEO:              'New Video',
         LIKE_OR_COMMENT:        'Total {{ num }} likes or comments',
+        PLEASE_ADD_CONTENT_OR_IMAGE:    'Please add content or image',
 
 
 
