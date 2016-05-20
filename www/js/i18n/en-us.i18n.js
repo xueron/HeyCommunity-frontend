@@ -104,8 +104,10 @@ HeyCommunity
         WHAT_IS_NEW:            'What\'s new?',
         PICTURE:                'Picture',
         NEW_PHOTO:              'New Photo',
+        NEW_IMAGE:              'New Image',
         NEW_VIDEO:              'New Video',
         LIKE_OR_COMMENT:        'Total {{ num }} likes or comments',
+        PLEASE_ADD_CONTENT_OR_IMAGE:    'Please add content or image',
 
 
 

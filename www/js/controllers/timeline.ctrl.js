@@ -72,7 +72,7 @@ HeyCommunity
         var hideSheet = $ionicActionSheet.show({
             titleText: $scope.filter('translate')('WHAT_IS_NEW'),
             buttons: [
-                {text: $scope.filter('translate')('NEW_PHOTO')},
+                {text: $scope.filter('translate')('NEW_IMAGE')},
                 // {text: $scope.filter('translate')('NEW_VIDEO')},
             ],
             cancelText: $scope.filter('translate')('CANCEL'),
@@ -104,7 +104,9 @@ HeyCommunity
     $scope.Timeline = {};
 
     $scope.store = function() {
-        if ($scope.Timeline.pic && $scope.Timeline.content) {
+        if (!$scope.Timeline.pic && !$scope.Timeline.content) {
+            $scope.utility.showNoticeText('PLEASE_ADD_CONTENT_OR_IMAGE', 1888);
+        } else {
             var params = {
                 attachment: $scope.Timeline.pic,
                 content: $scope.Timeline.content,
@@ -119,8 +121,6 @@ HeyCommunity
                     $scope.utility.showAlert({title: $scope.filter('translate')('ERROR'), content: response.data});
                 }
             });
-        } else {
-            return false;
         }
     }
 
