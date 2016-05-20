@@ -173,7 +173,7 @@ var HeyCommunity = angular.module('starter', [
     // http provider config
     $httpProvider.defaults.timeout = 5000;
 
-    $httpProvider.defaults.headers.common.domain = API;
+    $httpProvider.defaults.headers.common.domain = API.substring(0, API.length - 4);
 
     $httpProvider.interceptors.push(['$rootScope', function($rootScope) {
         return {
