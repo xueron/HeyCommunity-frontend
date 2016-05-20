@@ -49,6 +49,13 @@ HeyCommunity
                 self.timelines = self.timelines.concat(response.data.timelines);
                 self.timelineLikes = response.data.likes;
 
+                // remove del item
+                angular.forEach(self.timelines, function(timeline, $index) {
+                    if (inArray(timeline.id, response.data.delItems)) {
+                        self.timelines.splice($index, 1);
+                    }
+                });
+
                 self.saveInLocalStorage();
             } else {
                 UtilityService.showNoticeFail();
