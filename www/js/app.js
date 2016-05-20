@@ -135,8 +135,13 @@ var HeyCommunity = angular.module('starter', [
     // set language
     if (!localStorage.appLanguage) {
         $translateProvider.useSanitizeValueStrategy(null);
-        $translateProvider.preferredLanguage('zh-cn');
-        localStorage.appLanguage = 'zh-cn';
+        if (getLang() == 'zh-cn' || getLang() == 'ZH-cn') {
+            $translateProvider.preferredLanguage('zh-cn');
+            localStorage.appLanguage = 'zh-cn';
+        } else {
+            $translateProvider.preferredLanguage('en-us');
+            localStorage.appLanguage = 'en-us';
+        }
     } else {
         $translateProvider.useSanitizeValueStrategy(null);
         $translateProvider.preferredLanguage(localStorage.appLanguage);
