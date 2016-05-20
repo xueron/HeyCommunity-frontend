@@ -6,7 +6,7 @@
     </ion-nav-buttons>
 
     <ion-content id="module-timeline" style="margin-bottom:53px;">
-        <div>
+        <div ng-if="Timeline.attachment">
             <img style="min-height:60px; width:100%; margin-top:-10px; background-color:#ddd;" ng-src="{{ getPicUrl(Timeline.attachment + '?imageView/2/w/800') }}">
         </div>
 
@@ -23,7 +23,7 @@
         </div>
 
         <div class="padding" ng-if="Timeline">
-            <div class="">
+            <div ng-if="Timeline.content">
                 <img ui-sref="hey.user-home({id: Timeline.author.id})" style="position:absolute; width:30px; height:30px; border-radius:50%; background-color:#ddd;" ng-src="{{ getPicUrl(Timeline.author.avatar + '?imageView/2/w/80') }}">
                 <div class="" style="margin-left:40px; padding-right:40px; padding-bottom:10px; width:100%; min-height:40px;">
                     <a ui-sref="hey.user-home({id: Timeline.author.id})" style="color:rgb(54, 74, 142)">{{ Timeline.author.nickname }}</a>
