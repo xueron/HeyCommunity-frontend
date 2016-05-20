@@ -4,6 +4,7 @@ var HeyCommunity = angular.module('starter', [
     'ionic', 'ngCordova',
     'jett.ionic.filter.bar', 'ion-gallery', 'jett.ionic.scroll.sista', 'ngIOS9UIWebViewPatch', 'ion-affix',
     'pascalprecht.translate', 'ngFileUpload', 'ngImgCrop',
+    'hc.marked',
 ])
 
 
