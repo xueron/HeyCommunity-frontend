@@ -22,5 +22,27 @@
             }
         }
     }
+
+
+    //
+    // marked
+    marked, #marked {
+        h1 {
+            font-size: 20px;
+        }
+
+        h2 {
+            font-weight: 500;
+        }
+
+        p {
+            color: #444;
+        }
+
+        > p:first-child {
+            margin-top:0;
+        }
+    }
+
 }
 

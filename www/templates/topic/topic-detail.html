@@ -17,7 +17,9 @@
                 </div>
 
                 <div class="item item-body">
-                    <div ng-bind-html="Topic.content | nl2br"></div>
+                    <div id="marked" marked="Topic.content">
+                    </div>
+                    <div class="hide" ng-bind-html="Topic.content | nl2br"></div>
                     <p class="hide">
                         <a ng-click="like()" class="subdued"><i class="icon ion ion-heart"></i> {{ Topic.like_num }}</a>
                         <a class="subdued"><i class="icon ion ion-chatboxes"></i> {{ Topic.comment_num }}</a>
