@@ -26,7 +26,7 @@ HeyCommunity
         UPDATE:             'Update',
         DELETE:             'Delete',
         DESTROY:            'Destroy',
-        SELECT:             'Select',
+        DESTROY_ALL:        'Destroy All',
         MARK_CHECKED_ALL:   'All Mark Checked',
         MARK_CHECKED:       'Mark Checked',
         SELECT:             'Select',
