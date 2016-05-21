@@ -9508,6 +9508,12 @@ a.button {
 #module-topic marked > p:first-child, #module-topic #marked > p:first-child {
   margin-top: 0; }
 
+#module-topic #marked-normal * {
+  color: #444;
+  display: inline;
+  font-size: 14px;
+  font-weight: normal; }
+
 #module-user .hey-avatar img {
   width: 120px;
   height: 120px;
