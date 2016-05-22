@@ -20,8 +20,13 @@
         </div>
 
         <div class="list">
-            <a ng-repeat="item in TopicService.topics | orderBy: '-id' track by $index" class="item item-text-wrap" ui-sref="hey.topic-detail({id: $index, topicId: item.id})" nav-direction="forward">
-                <h2 class="title ng-binding">{{ item.title }}</h2>
+            <a ng-repeat="item in TopicService.topics | orderBy: ['-is_top', '-id'] track by $index" class="item item-text-wrap" ui-sref="hey.topic-detail({id: $index, topicId: item.id})" nav-direction="forward">
+                <h2 class="title ng-binding" style="{{ item.is_excellent ? 'color:#600702' : '' }}">
+                    <i ng-if="item.is_top" class="icon ion-pin"></i>
+                    <i ng-if="item.is_excellent" class="icon ion-bookmark"></i>
+                    <span ng-if="item.is_top || item.excellent" style="padding-right:2px;"></span>
+                    {{ item.title }}
+                </h2>
                 <div style="max-height:60px; overflow:hidden;">
                     <p class="content">
                         <span style="color:#333;">{{ item.author.nickname }}:</span>

@@ -10,7 +10,11 @@
             <div class="list card">
                 <div class="item item-avatar">
                     <img ui-sref="hey.user-home({id: Topic.author.id})" ng-if="Topic" style="background-color:#dfdfdf;" ng-src="{{ getPicUrl(Topic.author.avatar + '?imageView/2/w/80') }}">
-                    <h2>{{ Topic.title }}</h2>
+                    <h2 style="{{ Topic.is_excellent ? 'color:#600702' : '' }}">
+                        <i ng-if="Topic.is_top" class="icon ion-pin" style="padding-right:2px;"></i>
+                        <i ng-if="Topic.is_excellent" class="icon ion-bookmark" style="padding-right:2px;"></i>
+                        {{ Topic.title }}
+                    </h2>
                     <p>
                         <span ui-sref="hey.user-home({id: Topic.author.id})">{{ Topic.author.nickname }}</span> &nbsp; {{ getMomentDate(Topic.created_at) | date: "yyyy-MM-dd" : "+0800"}}
                     </p>
