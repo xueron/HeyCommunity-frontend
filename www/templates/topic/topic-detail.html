@@ -24,10 +24,22 @@
                     <div id="marked" marked="TopicService.currentTopic.content">
                     </div>
                     <div class="hide" ng-bind-html="TopicService.currentTopic.content | nl2br"></div>
-                    <p class="hide">
-                        <a ng-click="like()" class="subdued"><i class="icon ion ion-heart"></i> {{ TopicService.currentTopic.like_num }}</a>
-                        <a class="subdued"><i class="icon ion ion-chatboxes"></i> {{ TopicService.currentTopic.comment_num }}</a>
-                    </p>
+
+                    <div style="color:#777; margin-top:5px;" class="row">
+                        <div class="col">
+                            <span class="subdued"><i class="icon ion ion-eye"></i> {{ TopicService.currentTopic.view_num }}</span>
+                            &nbsp;&nbsp;
+                            <span class="subdued"><i class="icon ion ion-chatboxes"></i> {{ TopicService.currentTopic.comment_num }}</span>
+                        </div>
+
+                        <div class="col col-30">
+                            <div class="button-bar">
+                                <a ng-click="TopicService.voteUp()" class="button button-small" style="line-height:31px"><i class="icon ion-thumbsup"></i> &nbsp;{{ TopicService.currentTopic.vote_up_num }}</a>
+                                <a ng-click="TopicService.voteDown()" class="button button-small" style="line-height:31px"><i class="icon ion-thumbsdown"></i> &nbsp;{{ TopicService.currentTopic.vote_down_num }}</a>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
 
             </div>

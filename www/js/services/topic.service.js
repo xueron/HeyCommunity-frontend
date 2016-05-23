@@ -134,7 +134,7 @@ HeyCommunity
 
     //
     // toggle Top
-    self.toggleTop = function(params) {
+    self.toggleTop = function() {
         var params = {
             id: self.currentTopicId,
         }
@@ -155,7 +155,7 @@ HeyCommunity
 
     //
     // toggle Excellent
-    self.toggleExcellent = function(params) {
+    self.toggleExcellent = function() {
         var params = {
             id: self.currentTopicId,
         }
@@ -171,4 +171,47 @@ HeyCommunity
 
         return q;
     }
+
+
+
+    //
+    // vote up
+    self.voteUp = function() {
+        var params = {
+            id: self.currentTopicId,
+        }
+        var q = $http.post(getApiUrl('/topic/vote-up'), params);
+        q.then(function(response) {
+            if (response.status === 200) {
+                self.currentTopic = response.data;
+                self.topics[self.currentTopicIndex] = response.data;
+
+                self.saveInLocalStorage();
+            }
+        });
+
+        return q;
+    }
+
+
+
+    //
+    // vote down
+    self.voteDown = function() {
+        var params = {
+            id: self.currentTopicId,
+        }
+        var q = $http.post(getApiUrl('/topic/vote-down'), params);
+        q.then(function(response) {
+            if (response.status === 200) {
+                self.currentTopic = response.data;
+                self.topics[self.currentTopicIndex] = response.data;
+
+                self.saveInLocalStorage();
+            }
+        });
+
+        return q;
+    }
+
 }])
