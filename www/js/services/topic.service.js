@@ -5,6 +5,9 @@ HeyCommunity
     //
     var self = this;
     self.topics = [];
+    self.currentTopic = undefined;
+    self.currentTopicId = undefined;
+    self.currentTopicIndex = undefined;
 
 
     //
@@ -75,11 +78,7 @@ HeyCommunity
         var q = $http.post(getApiUrl('/topic/destroy'), params);
         q.then(function(response) {
             if (response.status == 200) {
-                angular.forEach(self.topics, function(value, key) {
-                    if (value.id == params.id) {
-                        delete self.topics.splice(key, 1);
-                    }
-                });
+                delete self.topics.splice(self.currentTopicIndex, 1);
 
                 self.saveInLocalStorage();
             }
@@ -119,17 +118,56 @@ HeyCommunity
         var q = $http.post(getApiUrl('/topic/comment-publish'),  params);
         q.then(function(response) {
             if (response.status === 200) {
-                angular.forEach(self.topics, function(value, key) {
-                    if (value.id === response.data.id) {
-                        self.topics[key] = response.data;
-                    }
-                });
+                self.currentTopic = response.data;
+                self.topics[self.currentTopicIndex] = response.data;
 
                 self.saveInLocalStorage();
             }
         }, function() {
             UtilityService.showNoticeFail();
         })
+
+        return q;
+    }
+
+
+
+    //
+    // toggle Top
+    self.toggleTop = function(params) {
+        var params = {
+            id: self.currentTopicId,
+        }
+        var q = $http.post(getApiUrl('/topic/toggle-top'), params);
+        q.then(function(response) {
+            if (response.status === 200) {
+                self.currentTopic = response.data;
+                self.topics[self.currentTopicIndex] = response.data;
+
+                self.saveInLocalStorage();
+            }
+        });
+
+        return q;
+    }
+
+
+
+    //
+    // toggle Excellent
+    self.toggleExcellent = function(params) {
+        var params = {
+            id: self.currentTopicId,
+        }
+        var q = $http.post(getApiUrl('/topic/toggle-excellent'), params);
+        q.then(function(response) {
+            if (response.status === 200) {
+                self.currentTopic = response.data;
+                self.topics[self.currentTopicIndex] = response.data;
+
+                self.saveInLocalStorage();
+            }
+        });
 
         return q;
     }

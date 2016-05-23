@@ -54,22 +54,22 @@ HeyCommunity
     var topicIndex = $scope.stateParams.id;
     var topicId = $scope.stateParams.topicId;
 
-    $scope.$root.TopicService = TopicService;
-    $scope.Topic = {};
+    $scope.TopicService = TopicService;
+    TopicService.currentTopic = {};
     $scope.TopicComment = {};
 
-    console.log($scope.$root.TopicService.topics)
-    if ($scope.$root.TopicService.topics !== undefined) {
-        $scope.Topic = $scope.filter('orderBy')(TopicService.topics, '-id')[$scope.stateParams.id];
+    if (TopicService.topics !== undefined) {
+        TopicService.currentTopic = $scope.filter('orderBy')(TopicService.topics, ['-is_top', '-id'])[$scope.stateParams.id];
+        TopicService.currentTopicIndex = $scope.stateParams.id;
+        TopicService.currentTopicId = $scope.stateParams.topicId;
     }
-    console.log($scope.Topic)
 
     //
     //
     $scope.$root.loadingShowDisabled = true;
     TopicService.show({id: $scope.stateParams.topicId}).then(function(response) {
         if (response.status === 200) {
-            $scope.Topic = response.data;
+            TopicService.currentTopic = response.data;
         }
     });
 
@@ -79,12 +79,9 @@ HeyCommunity
             id: $scope.stateParams.topicId,
             content: $scope.TopicComment.content,
         }
-        console.debug('### TopicService.commentPublish params', params);
         TopicService.commentPublish(params).then(function(response) {
-            console.debug('### TopicService.commentPublish response', response);
             if (response.status == 200) {
                 $scope.TopicComment.content = '';
-                $scope.Topic = response.data;
             }
         });
     }
@@ -113,10 +110,32 @@ HeyCommunity
 
     //
     $scope.showActionSheet = function() {
+        var buttons = [{
+            text: $scope.filter('translate')('REPORT')
+        }];
+        if ($scope.utility.isAdmin()) {
+            if (TopicService.currentTopic.is_top) {
+                buttons.push({
+                    text: $scope.filter('translate')('CANCEL_TOP')
+                });
+            } else {
+                buttons.push({
+                    text: $scope.filter('translate')('SET_TOP')
+                });
+            }
+
+            if (TopicService.currentTopic.is_excellent) {
+                buttons.push({
+                    text: $scope.filter('translate')('CANCEL_EXCELLENT')
+                });
+            } else {
+                buttons.push({
+                    text: $scope.filter('translate')('SET_EXCELLENT')
+                });
+            }
+        }
         var config = {
-            buttons: [{
-                text: $scope.filter('translate')('REPORT')
-            }],
+            buttons: buttons,
             titleText: $scope.filter('translate')('MANAGEMENT_OPERATIONS'),
             cancelText: $scope.filter('translate')('CANCEL'),
             cancel: function() {
@@ -124,6 +143,10 @@ HeyCommunity
             buttonClicked: function(index) {
                 if (index === 0) {
                     $scope.reportModal.show();
+                } else if (index === 1) {
+                    $scope.TopicService.toggleTop();
+                } else if (index === 2) {
+                    $scope.TopicService.toggleExcellent();
                 }
                 hideSheet();
             },
