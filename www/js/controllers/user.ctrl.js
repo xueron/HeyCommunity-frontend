@@ -99,6 +99,37 @@ HeyCommunity
     $scope.userInfo.newAvatar = false;
 
     //
+    $scope.showActionSheet = function() {
+        var config = {
+            buttons: [{
+                text: $scope.filter('translate')('REPLACE_AVATAR')
+            }],
+            cancelText: $scope.filter('translate')('CANCEL'),
+            cancel: function() {
+            },
+            buttonClicked: function(index) {
+                if (index === 0) {
+                    $scope.$watch('userInfo.newAvatar', function(newVal, oldVal) {
+                        console.log(newVal, oldVal);
+                        if (newVal) {
+                            $scope.submitAvatar();
+                        }
+                    })
+
+                    $scope.selectAvatar();
+                }
+                hideSheet();
+            },
+        }
+
+        var hideSheet = $ionicActionSheet.show(config);
+
+        $scope.timeout(function() {
+            hideSheet();
+        }, 6000);
+    };
+
+    //
     $scope.selectAvatar = function() {
         angular.element('form input').click();
     }
