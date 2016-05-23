@@ -74,6 +74,7 @@ HeyCommunity
         NICKNAME:           '昵称',
 
         SELECT_NEW_AVATAR:      '选择新头像',
+        REPLACE_AVATAR:         '更换头像',
 
         SETUP_GENERAL_LANGUAGE:         '语言设置',
         SETUP_GENERAL:                  '通用设置',
@@ -142,6 +143,10 @@ HeyCommunity
         TOPIC:                  '话题',
         CREATE_TOPIC:           '新话题',
         SAY_SOMETHING:          '说点什么',
+        SET_TOP:                '设为置顶',
+        SET_EXCELLENT:          '设为精华',
+        CANCEL_TOP:             '取消置顶',
+        CANCEL_EXCELLENT:       '取消精华',
 
 
 

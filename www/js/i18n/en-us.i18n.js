@@ -74,6 +74,7 @@ HeyCommunity
         NICKNAME:           'Nickname',
 
         SELECT_NEW_AVATAR:      'Select New Avatar',
+        REPLACE_AVATAR:         'Replace Avatar',
 
         SETUP_GENERAL_LANGUAGE:         'Language Settings',
         SETUP_GENERAL:                  'General Settings',
@@ -142,6 +143,10 @@ HeyCommunity
         TOPIC:                  'Topic',
         CREATE_TOPIC:           'New Topic',
         SAY_SOMETHING:          'Say Something',
+        SET_TOP:                'Set Top',
+        SET_EXCELLENT:          'Set Excellent',
+        CANCEL_TOP:             'Cancel Top',
+        CANCEL_EXCELLENT:       'Cancel Excellent',
 
 
 
