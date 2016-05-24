@@ -1,12 +1,18 @@
 <ion-view view-title="{{ 'AVATAR' | translate }}" cache-view="false">
+    <ion-nav-buttons side="right">
+        <button ng-click="showActionSheet()" class="button back-button buttons button-clear header-item" style="">
+            <i class="icon ion-navicon"></i>
+        </button>
+    </ion-nav-buttons>
+
     <ion-content id="module-user" class="page-user-info-avatar">
         <div class="padding">
-            <div class="text-center" style="margin-top:20px;">
-                <img ng-if="!userInfo.newAvatar" style="max-width:60%; max-height:200px;" ng-src="{{ getPicUrl(userInfo.avatar + '?imageView/2/w/80') }}">
-                <img ng-if="userInfo.newAvatar" style="max-width:60%; max-height:200px;" ng-src="{{ userInfo.newAvatar | ngfDataUrl }}">
+            <div class="text-center" style="margin-top:60px;">
+                <img ng-if="!userInfo.newAvatar" style="max-width:100%; max-height:200px;" ng-src="{{ getPicUrl(userInfo.avatar + '?imageView/2/w/80') }}">
+                <img ng-if="userInfo.newAvatar" style="max-width:100%; max-height:200px;" ng-src="{{ userInfo.newAvatar | ngfDataUrl }}">
             </div>
 
-            <div style="margin:30px 10%">
+            <div class="hide" style="margin:30px 10%">
                 <button ng-if="!userInfo.newAvatar" ng-click="selectAvatar()" class="button button-block">{{ 'SELECT_NEW_AVATAR' | translate }}</button>
                 <button ng-if="userInfo.newAvatar" ng-click="submitAvatar()" class="button button-block">{{ 'UPDATE' | translate }}</button>
             </div>
