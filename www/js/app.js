@@ -65,6 +65,10 @@ var HeyCommunity = angular.module('starter', [
         UserService.userInfo().then(function(response) {
             if (response.status === 200) {
                 $rootScope.userInfo = response.data;
+            } else {
+                if (isWeChatBrowser()) {
+                    location.assign('http://www.hey-community.com/api/wechat/o-auth');
+                }
             }
         });
 

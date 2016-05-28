@@ -71,3 +71,11 @@ function getLang() {
 
     return lang;
 }
+
+
+//
+//
+function isWeChatBrowser() {
+    var ua = navigator.userAgent.toLowerCase();
+    return (/micromessenger/.test(ua)) ? true : false ;
+}
