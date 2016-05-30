@@ -70,11 +70,11 @@ HeyCommunity
     }
 
     // user info
-    this.userInfo = function(id) {
+    this.user = function(id) {
         if (id) {
-            var q = $http.get(getApiUrl('/user/user-info/' + id));
+            var q = $http.get(getApiUrl('/user/user/' + id));
         } else {
-            var q = $http.get(getApiUrl('/user/user-info'));
+            var q = $http.get(getApiUrl('/user/user'));
         }
         q.then(function(response) {
             if (response.status === 200 && typeof(response.data) === 'object') {

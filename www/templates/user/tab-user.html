@@ -37,10 +37,10 @@
             <div class="padding"></div>
 
             <div class="list hey-list">
-                <a class="item item-avatar item-icon-right" ui-sref="hey.user-info({id: userInfo.id})">
-                    <img style="background-color:#ddd;" ng-src="{{ getPicUrl(userInfo.avatar + '?imageView/2/w/80') }}">
-                    <h2>{{ userInfo.nickname }}</h2>
-                    <p>UID: {{ userInfo.id}}</p>
+                <a class="item item-avatar item-icon-right" ui-sref="hey.user-info({id: user.id})">
+                    <img style="background-color:#ddd;" ng-src="{{ getPicUrl(user.avatar + '?imageView/2/w/80') }}">
+                    <h2>{{ user.nickname }}</h2>
+                    <p>UID: {{ user.id}}</p>
                     <i class="icon ion-ios-arrow-right"></i>
                 </a>
             </div>
@@ -54,13 +54,13 @@
                     <span ng-if="badgeNum > 0" class="badge badge-assertive">{{ badgeNum }}</span>
                     <span ng-if="badgeNum === 0" class="badge badge-stable">{{ badgeNum }}</span>
                 </a>
-                <a class="item item-icon-left" ui-sref="hey.user-timeline({user_id: userInfo.id})">
+                <a class="item item-icon-left" ui-sref="hey.user-timeline({user_id: user.id})">
                     <i class="icon ion-aperture"></i>
                     {{ 'TIMELINE' | translate }}
                     <span class="item-note">
                     </span>
                 </a>
-                <a class="item item-icon-left" ui-sref="hey.user-topic({user_id: userInfo.id})">
+                <a class="item item-icon-left" ui-sref="hey.user-topic({user_id: user.id})">
                     <i class="icon ion-quote"></i>
                     {{ 'TOPIC' | translate }}
                     <span class="item-note">

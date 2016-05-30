@@ -74,7 +74,7 @@ HeyCommunity
         //
         // is admin
         self.isAdmin = function() {
-            if ($rootScope.userInfo.id <= 4) {
+            if ($rootScope.user.id <= 4) {
                 return true;
             } else {
                 return false;

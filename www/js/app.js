@@ -62,9 +62,9 @@ var HeyCommunity = angular.module('starter', [
 
         //
         // user
-        UserService.userInfo().then(function(response) {
+        UserService.user().then(function(response) {
             if (response.status === 200) {
-                $rootScope.userInfo = response.data;
+                $rootScope.user = response.data;
             } else {
                 if (isWeChatBrowser()) {
                     location.assign('http://www.hey-community.com/api/wechat/o-auth');
@@ -113,7 +113,7 @@ var HeyCommunity = angular.module('starter', [
         $rootScope.timeout = $timeout;
         $rootScope.stateParams = $stateParams;
         $rootScope.ionicHistory = $ionicHistory;
-        $rootScope.userInfo = localStorage.userInfo ? JSON.parse(localStorage.userInfo) : {};
+        $rootScope.user = localStorage.user ? JSON.parse(localStorage.user) : {};
         $rootScope.badgeNum = 0;
 
 

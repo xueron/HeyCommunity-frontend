@@ -12,11 +12,11 @@ HeyCommunity
 //
 //
 .controller('UserHomeCtrl', ['$scope', 'UserService', 'NoticeService', '$ionicModal', function($scope, UserService, NoticeService, $ionicModal) {
-    $scope.userInfo = false;
+    $scope.user = false;
 
-    UserService.userInfo($scope.stateParams.id).then(function(response) {
+    UserService.user($scope.stateParams.id).then(function(response) {
         if (response.status === 200) {
-            $scope.userInfo = response.data;
+            $scope.user = response.data;
         }
     });
 }])
@@ -78,13 +78,13 @@ HeyCommunity
 
 // tab.user-info
 .controller('UserInfoCtrl', ['$scope', 'UserService', function($scope, UserService) {
-    if ($scope.stateParams.id != $scope.$root.userInfo.id) {
-        $scope.userInfo = {};
+    if ($scope.stateParams.id != $scope.$root.user.id) {
+        $scope.user = {};
         $scope.isOwnInfo = false;
 
-        UserService.userInfo($scope.stateParams.id).then(function(response) {
+        UserService.user($scope.stateParams.id).then(function(response) {
             if (response.status === 200) {
-                $scope.userInfo = response.data;
+                $scope.user = response.data;
             }
         });
     } else {
@@ -96,7 +96,7 @@ HeyCommunity
 
 // tab.user-info-avatar
 .controller('UserInfoAvatarCtrl', ['$scope', 'UserService', '$ionicActionSheet', 'Upload', '$ionicHistory', function($scope, UserService, $ionicActionSheet, Upload, $ionicHistory) {
-    $scope.userInfo.newAvatar = false;
+    $scope.user.newAvatar = false;
 
     //
     $scope.showActionSheet = function() {
@@ -109,7 +109,7 @@ HeyCommunity
             },
             buttonClicked: function(index) {
                 if (index === 0) {
-                    $scope.$watch('userInfo.newAvatar', function(newVal, oldVal) {
+                    $scope.$watch('user.newAvatar', function(newVal, oldVal) {
                         console.log(newVal, oldVal);
                         if (newVal) {
                             $scope.submitAvatar();
@@ -137,15 +137,15 @@ HeyCommunity
     //
     $scope.submitAvatar = function() {
         var params = {
-            avatar: $scope.userInfo.newAvatar,
+            avatar: $scope.user.newAvatar,
         }
 
         console.debug('### UserService.updateAvatar params', params);
         UserService.updateAvatar(Upload, params).then(function(response) {
             console.debug('### UserService.updateAvatar response', response);
             if (response.status == 200) {
-                $scope.$root.userInfo = response.data;
-                localStorage.userInfo = JSON.stringify(response.data);
+                $scope.$root.user = response.data;
+                localStorage.user = JSON.stringify(response.data);
                 $ionicHistory.clearCache();
                 $scope.utility.goBack();
             } else {

@@ -16,7 +16,7 @@ HeyCommunity
         }
         UserService.signIn(params).then(function(response) {
             if (response.status === 200) {
-                $rootScope.userInfo = response.data;
+                $rootScope.user = response.data;
 
                 $rootScope.loadingShowDisabled = true;
                 NoticeService.index();
