@@ -247,7 +247,7 @@ HeyCommunity
             },
         }
 
-        if ($scope.utility.isAdmin() || $scope.Timeline.user_id == $scope.userInfo.id) {
+        if ($scope.utility.isAdmin() || $scope.Timeline.user_id == $scope.user.id) {
             config.destructiveText = $scope.filter('translate')('DESTROY');
         }
 

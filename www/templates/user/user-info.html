@@ -4,27 +4,27 @@
 
         <div class="list hey-list">
             <a ng-if="isOwnInfo" class="item item-avatar item-icon-right" ui-sref="hey.user-info-avatar">
-                <img ng-src="{{ getPicUrl(userInfo.avatar + '?imageView/2/w/80') }}">
-                <h2>{{ userInfo.nickname }}</h2>
-                <p>UID: {{ userInfo.id}}</p>
+                <img ng-src="{{ getPicUrl(user.avatar + '?imageView/2/w/80') }}">
+                <h2>{{ user.nickname }}</h2>
+                <p>UID: {{ user.id}}</p>
                 <i class="icon ion-ios-arrow-right"></i>
             </a>
             <span ng-if="!isOwnInfo" class="item item-avatar item-icon-right">
-                <img ng-src="{{ getPicUrl(userInfo.avatar + '?imageView/2/w/80') }}">
-                <h2>{{ userInfo.nickname }}</h2>
-                <p>UID: {{ userInfo.id}}</p>
+                <img ng-src="{{ getPicUrl(user.avatar + '?imageView/2/w/80') }}">
+                <h2>{{ user.nickname }}</h2>
+                <p>UID: {{ user.id}}</p>
             </span>
 
             <div ng-if="isOwnInfo" class="item todo-item-icon-right">
                 {{ 'PHONE' | translate }}
                 <span class="item-note">
-                    {{ userInfo.phone }}
+                    {{ user.phone }}
                 </span>
             </div>
             <div class="item todo-item-icon-right">
                 {{ 'EMAIL' | translate }}
                 <span class="item-note">
-                    {{ userInfo.email }}
+                    {{ user.email }}
                 </span>
             </div>
         </div>

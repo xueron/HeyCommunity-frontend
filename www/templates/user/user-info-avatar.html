@@ -8,18 +8,18 @@
     <ion-content id="module-user" class="page-user-info-avatar">
         <div class="padding">
             <div class="text-center" style="margin-top:60px;">
-                <img ng-if="!userInfo.newAvatar" style="max-width:100%; max-height:200px;" ng-src="{{ getPicUrl(userInfo.avatar + '?imageView/2/w/80') }}">
-                <img ng-if="userInfo.newAvatar" style="max-width:100%; max-height:200px;" ng-src="{{ userInfo.newAvatar | ngfDataUrl }}">
+                <img ng-if="!user.newAvatar" style="max-width:100%; max-height:200px;" ng-src="{{ getPicUrl(user.avatar + '?imageView/2/w/80') }}">
+                <img ng-if="user.newAvatar" style="max-width:100%; max-height:200px;" ng-src="{{ user.newAvatar | ngfDataUrl }}">
             </div>
 
             <div class="hide" style="margin:30px 10%">
-                <button ng-if="!userInfo.newAvatar" ng-click="selectAvatar()" class="button button-block">{{ 'SELECT_NEW_AVATAR' | translate }}</button>
-                <button ng-if="userInfo.newAvatar" ng-click="submitAvatar()" class="button button-block">{{ 'UPDATE' | translate }}</button>
+                <button ng-if="!user.newAvatar" ng-click="selectAvatar()" class="button button-block">{{ 'SELECT_NEW_AVATAR' | translate }}</button>
+                <button ng-if="user.newAvatar" ng-click="submitAvatar()" class="button button-block">{{ 'UPDATE' | translate }}</button>
             </div>
         </div>
 
         <form ng-submit="submitAvatar()" class="hide">
-            <input type="file" ngf-select ng-model="userInfo.newAvatar" name="avatar" ngf-change="avatarChanged($files)" ngf-accept="'image/*'" ngf-resize="{width: 200, height: 200, ratio: '1:1', centerCrop: true,}" required ngf-max-size="20MB" ngf-min-height="100" ngf-min-width="100">
+            <input type="file" ngf-select ng-model="user.newAvatar" name="avatar" ngf-change="avatarChanged($files)" ngf-accept="'image/*'" ngf-resize="{width: 200, height: 200, ratio: '1:1', centerCrop: true,}" required ngf-max-size="20MB" ngf-min-height="100" ngf-min-width="100">
         </form>
     </ion-content>
 </ion-view>
