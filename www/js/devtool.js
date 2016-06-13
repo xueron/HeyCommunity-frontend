@@ -5,6 +5,6 @@ devtool.clearLocalStorage = function() {
     localStorage.removeItem('timelineLikes');
     localStorage.removeItem('topics');
     localStorage.removeItem('user');
-    localStorage.removeItem('tenantInfo');
+    localStorage.removeItem('systemInfo');
     localStorage.removeItem('appLanguage');
 }
