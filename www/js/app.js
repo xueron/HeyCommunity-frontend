@@ -50,7 +50,12 @@ var HeyCommunity = angular.module('starter', [
 
         //
         // Set TenantInfo
-        $rootScope.appSiteTitle = 'Hey Community';
+        if (localStorage.getItem('systemInfo')) {
+            var systemInfo = JSON.parse(localStorage.getItem('systemInfo'));
+            $rootScope.appSiteTitle = systemInfo.site_name;
+        } else {
+            $rootScope.appSiteTitle = 'Hey Community';
+        }
         SystemService.getTenantInfo().then(function(response) {
             if (typeof response.data === 'object') {
                 $rootScope.appSiteTitle = response.data.site_name;
