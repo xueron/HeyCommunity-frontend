@@ -237,7 +237,14 @@ HeyCommunity
     $scope.NoticeService = NoticeService;
 
     $scope.$root.loadingShowDisabled = true;
-    NoticeService.index();
+    NoticeService.index().then(function() {
+        angular.forEach(NoticeService.notices, function(item, $index) {
+            if (item.is_checked != 1) {
+                NoticeService.check($index);
+            }
+        })
+    });
+
 
     //
     // load more
@@ -255,20 +262,8 @@ HeyCommunity
             titleText: $scope.filter('translate')('MANAGEMENT_OPERATIONS'),
             cancelText: $scope.filter('translate')('CANCEL'),
             buttons: [
-                {text: $scope.filter('translate')('MARK_CHECKED_ALL')},
             ],
             cancel: function() {
-            },
-            buttonClicked: function(index) {
-                if (index === 0) {
-                    angular.forEach(NoticeService.notices, function(item, $index) {
-                        if (item.is_checked != 1) {
-                            NoticeService.check($index);
-                        }
-                    })
-                }
-                hideSheet();
-                // NoticeService.index();
             },
             destructiveButtonClicked: function(index) {
                 angular.forEach(NoticeService.notices, function(item, $index) {
