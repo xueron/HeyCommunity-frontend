@@ -148,9 +148,12 @@ var HeyCommunity = angular.module('starter', [
         if (getLang() == 'zh-cn' || getLang() == 'ZH-cn') {
             $translateProvider.preferredLanguage('zh-cn');
             localStorage.appLanguage = 'zh-cn';
-        } else {
+        } else if (getLang() == 'en-us' || getLang() == 'EN-us') {
             $translateProvider.preferredLanguage('en-us');
             localStorage.appLanguage = 'en-us';
+        } else {
+            $translateProvider.preferredLanguage('zh-cn');
+            localStorage.appLanguage = 'zh-cn';
         }
     } else {
         $translateProvider.useSanitizeValueStrategy(null);
