@@ -119,7 +119,7 @@ HeyCommunity
         q.then(function(response) {
             if (response.status === 200) {
                 self.currentTopic = response.data;
-                self.topics[self.currentTopicIndex] = response.data;
+                $rootScope.filter('orderBy')(self.topics, ['-is_top', '-created_at'])[self.currentTopicIndex] = response.data;
 
                 self.saveInLocalStorage();
             }

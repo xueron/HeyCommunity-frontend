@@ -20,7 +20,7 @@
         </div>
 
         <div class="list">
-            <a ng-repeat="item in TopicService.topics | orderBy: ['-is_top', '-id'] track by $index" class="item item-text-wrap" ui-sref="hey.topic-detail({id: $index, topicId: item.id})" nav-direction="forward">
+            <a ng-repeat="item in TopicService.topics | orderBy: ['-is_top', '-created_at'] track by $index" class="item item-text-wrap" ui-sref="hey.topic-detail({id: $index, topicId: item.id})" nav-direction="forward">
                 <h2 class="title ng-binding" style="{{ item.is_excellent ? 'color:#600702' : '' }}">
                     <i ng-if="item.is_top" class="icon ion-pin"></i>
                     <i ng-if="item.is_excellent" class="icon ion-bookmark"></i>

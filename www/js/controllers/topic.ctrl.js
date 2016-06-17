@@ -59,7 +59,7 @@ HeyCommunity
     $scope.TopicComment = {};
 
     if (TopicService.topics !== undefined) {
-        TopicService.currentTopic = $scope.filter('orderBy')(TopicService.topics, ['-is_top', '-id'])[$scope.stateParams.id];
+        TopicService.currentTopic = $scope.filter('orderBy')(TopicService.topics, ['-is_top', '-created_at'])[$scope.stateParams.id];
         TopicService.currentTopicIndex = $scope.stateParams.id;
         TopicService.currentTopicId = $scope.stateParams.topicId;
     }
