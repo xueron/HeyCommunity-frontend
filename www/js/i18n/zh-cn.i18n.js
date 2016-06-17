@@ -12,7 +12,7 @@ HeyCommunity
         USER_CENTER:        '用户中心',
 
         LANGUAGE:           '语言',
-        PLEASE_SIGN_IN:     '请先登录',
+        PLEASE_SIGNIN_AGAIN:'新重新登录',
         ERROR:              '错误',
         REPORT:             '报告',
 
