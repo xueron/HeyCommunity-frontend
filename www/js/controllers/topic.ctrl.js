@@ -156,7 +156,7 @@ HeyCommunity
             },
         }
 
-        if ($scope.utility.isAdmin()) {
+        if ($scope.utility.isAdmin() || TopicService.currentTopic.user_id == $scope.user.id) {
             config.destructiveText = $scope.filter('translate')('DESTROY');
         }
 
