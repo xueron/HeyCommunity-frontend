@@ -12,7 +12,7 @@ HeyCommunity
         USER_CENTER:        'User Center',
 
         LANGUAGE:           'Language',
-        PLEASE_SIGN_IN:     'Please Sign-in',
+        PLEASE_SIGNIN_AGAIN:'Please SignIn Again',
         ERROR:              'Error',
         REPORT:             'Report',
 
