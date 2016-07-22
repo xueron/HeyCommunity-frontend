@@ -8691,3 +8691,7 @@ body {
   .timeline img {
     height: 100px;
     background-color: #ddd; }
+
+.timeline-create .media-toolbar {
+  margin-top: -32px;
+  margin-bottom: -7px; }
