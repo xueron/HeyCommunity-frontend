@@ -22,35 +22,36 @@
   <ion-card *ngFor="let item of timelines">
     <ion-item>
       <ion-avatar item-left>
-        <img src="{{ item.attachment }}">
+        <img class="avatar" src="{{ item.attachment }}">
       </ion-avatar>
       <h2>{{ item.author.nickname }}</h2>
       <p>{{ item.created_at }}</p>
     </ion-item>
 
-    <img *ngIf="item.attachment" src="{{ item.attachment }}">
-    <hr *ngIf="!item.attachment" style="margin:0;">
+    <img class="photo" *ngIf="item.attachment" src="{{ item.attachment }}">
+    <hr>
 
     <ion-card-content (click)="gotoTimelineDetailPage(item)">
-      <p *ngIf="item.content">{{ item.content }}</p>
+      <div class="content" *ngIf="item.content">{{ item.content }}</div>
     </ion-card-content>
 
     <ion-row>
       <ion-col>
-        <button primary clear small>
-          <ion-icon name="thumbs-up"></ion-icon>
+        <button primary clear small (click)="setLikeTimeline(item)">
+          <ion-icon *ngIf="false" name="heart"></ion-icon>
+          <ion-icon name="heart-outline"></ion-icon>
           <div>{{ item.like_num }} Likes</div>
         </button>
       </ion-col>
       <ion-col>
-        <button primary clear small>
+        <button primary clear small (click)="gotoTimelineDetailPage(item)">
           <ion-icon name="text"></ion-icon>
           <div>{{ item.comment_num }} Comments</div>
         </button>
       </ion-col>
       <ion-col center text-center>
         <ion-note>
-          11h ago
+          {{ item.created_at | timeago }}
         </ion-note>
       </ion-col>
     </ion-row>
