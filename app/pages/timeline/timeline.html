@@ -22,10 +22,10 @@
   <ion-card *ngFor="let item of timelines">
     <ion-item>
       <ion-avatar item-left>
-        <img class="avatar" src="{{ item.attachment }}">
+        <img class="avatar" src="{{ item.author.avatar }}">
       </ion-avatar>
       <h2>{{ item.author.nickname }}</h2>
-      <p>{{ item.created_at }}</p>
+      <p>{{ item.created_at | moment: ['YYYY-MM-DD HH:mm'] }}</p>
     </ion-item>
 
     <img class="photo" *ngIf="item.attachment" src="{{ item.attachment }}">
@@ -37,9 +37,9 @@
 
     <ion-row>
       <ion-col>
-        <button primary clear small (click)="setLikeTimeline(item)">
-          <ion-icon *ngIf="false" name="heart"></ion-icon>
-          <ion-icon name="heart-outline"></ion-icon>
+        <button primary clear small (click)="setLikeForTimeline(item)">
+          <ion-icon *ngIf="item.is_like" name="heart"></ion-icon>
+          <ion-icon *ngIf="!item.is_like" name="heart-outline"></ion-icon>
           <div>{{ item.like_num }} Likes</div>
         </button>
       </ion-col>
