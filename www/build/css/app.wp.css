@@ -9174,10 +9174,50 @@ body {
   .timeline ion-card {
     width: 100%;
     margin: 0 0 12px 0; }
-  .timeline img {
-    height: 100px;
-    background-color: #ddd; }
+    .timeline ion-card hr {
+      margin: 0; }
+    .timeline ion-card .content {
+      color: #444; }
+    .timeline ion-card img.avatar {
+      min-height: 36px;
+      min-width: 36px;
+      background-color: #ddd; }
+    .timeline ion-card img.phtot {
+      width: 100%;
+      background-color: #ddd; }
+
+.timeline-detail .section-comment {
+  background-color: #eee;
+  color: #444; }
+  .timeline-detail .section-comment .avatar {
+    position: absolute;
+    border-radius: 50%;
+    background-color: #ddd;
+    width: 30px;
+    height: 30px; }
+  .timeline-detail .section-comment .comments .comment-content {
+    margin-left: 40px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 16px; }
+    .timeline-detail .section-comment .comments .comment-content .header {
+      line-height: 20px; }
+      .timeline-detail .section-comment .comments .comment-content .header a {
+        font-size: 16px; }
+      .timeline-detail .section-comment .comments .comment-content .header span {
+        float: right;
+        color: #999; }
+  .timeline-detail .section-comment .comments:last-of-type .comment-content {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none; }
+
+.timeline-create #section-textarea {
+  margin-bottom: 0; }
+  .timeline-create #section-textarea ion-item {
+    padding-left: 0; }
+  .timeline-create #section-textarea textarea {
+    padding-left: 16px; }
 
 .timeline-create .media-toolbar {
-  margin-top: -32px;
   margin-bottom: -7px; }
