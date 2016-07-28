@@ -32,4 +32,11 @@
     </button>
   </div>
   <hr>
+
+
+  <input type="file" 
+       style="display:none;"
+       [ng-file-select]="options"
+       (onUpload)="handleUpload($event)"
+       multiple>
 </ion-content>
