@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <button menuToggle>
-      <ion-icon name="menu"></ion-icon>
+      <ion-icon name="contact"></ion-icon>
     </button>
 
     <ion-title>Timeline</ion-title>
@@ -22,10 +22,10 @@
   <ion-card *ngFor="let item of timelines">
     <ion-item>
       <ion-avatar item-left>
-        <img class="avatar" src="{{ item.attachment }}">
+        <img class="avatar" src="{{ item.author.avatar }}">
       </ion-avatar>
       <h2>{{ item.author.nickname }}</h2>
-      <p>{{ item.created_at }}</p>
+      <p>{{ item.created_at | moment: ['YYYY-MM-DD HH:mm'] }}</p>
     </ion-item>
 
     <img class="photo" *ngIf="item.attachment" src="{{ item.attachment }}">
