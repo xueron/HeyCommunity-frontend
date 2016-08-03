@@ -9212,6 +9212,21 @@ body {
     margin-bottom: 0;
     border-bottom: none; }
 
+.timeline-detail .section-comment-inputbox {
+  position: relative; }
+  .timeline-detail .section-comment-inputbox .input-comment {
+    padding: 0 64px 0 6px; }
+    .timeline-detail .section-comment-inputbox .input-comment input {
+      border-radius: 4px;
+      background-color: #ddd;
+      padding: 6px 10px;
+      margin: 6px 8px 4px 0; }
+  .timeline-detail .section-comment-inputbox .btn-send {
+    position: absolute;
+    right: 6px;
+    top: 3px;
+    width: 56px; }
+
 .timeline-create #section-textarea {
   margin-bottom: 0; }
   .timeline-create #section-textarea ion-item {
