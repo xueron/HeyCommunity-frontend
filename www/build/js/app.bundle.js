@@ -223,8 +223,8 @@ var Helper = (function () {
     //
     //
     Helper.prototype.getAPI = function (string) {
-        return '/api/' + string;
-        // return 'http://new-app.heycommunity.com/api/' + string;
+        // return '/api/' + string;
+        return 'http://new-app.heycommunity.com/api/' + string;
     };
     Helper = __decorate([
         core_1.Injectable(), 
