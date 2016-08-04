@@ -12,29 +12,50 @@ export class Auth {
 
   //
   //
-  constructor(private http: Http) {
+  constructor(
+    private http: Http,
+    private events: Events
+  ) {
   }
 
 
   //
   //
-  isAuth(): boolean {
-    return true;
+  isAuth() {
+    return this.storage.get(this.IS_AUTH).then(value => {
+      return value;
+    });
   }
 
 
   //
   //
-  logInHandler() {
+  getUser() {
+    return this.storage.get(this.USER_INFO).then(value => {
+      console.log(value, JSON.parse(value));
+      return JSON.parse(value);
+    })
+  }
+
+
+  //
+  //
+  logIn(params) {
+    let userInfo: string = JSON.stringify(params);
+
     this.storage.set(this.IS_AUTH, true);
-    this.storage.set(this.USER_INFO, true);
+    this.storage.set(this.USER_INFO, userInfo);
+
+    this.events.publish('auth:loggedIn');
   }
 
 
   //
   //
-  logOutHandler() {
+  logOut() {
     this.storage.remove(this.IS_AUTH);
     this.storage.remove(this.USER_INFO);
+
+    this.events.publish('auth:loggedOut');
   }
 }

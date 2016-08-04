@@ -1,13 +1,14 @@
 import {Component, ViewChild} from '@angular/core';
-import {Platform, ionicBootstrap, Nav, Modal, MenuController} from 'ionic-angular';
+import {Platform, ionicBootstrap, Events, Nav, Modal, MenuController} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {HTTP_PROVIDERS} from '@angular/http';
 
 import {Helper} from './other/helper.component';
 import {Auth} from './other/Auth.component';
+import {User} from './models/user.model';
 
 import {TabsPage} from './pages/tabs/tabs';
-import {UserSignInPage} from './pages/user/userSignIn';
+import {UserSignUpPage} from './pages/user/userSignUp';
 import {UserLogInPage} from './pages/user/userLogIn';
 
 
@@ -17,6 +18,7 @@ interface PageObj {
   component?: any;
   index?: number;
   type?: string;
+  handler?: string;
 }
 
 @Component({
@@ -25,8 +27,13 @@ interface PageObj {
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
+  //
   private rootPage:any;
 
+  //
+  user: User = {id: 0, nickname: '', phone: ''};
+
+  //
   appPages: PageObj[] = [
     {icon: 'pulse', title: 'Timeline', component: TabsPage, index: 0},
     {icon: 'images', title: 'Timeline', component: TabsPage, index: 1},
@@ -35,10 +42,15 @@ export class MyApp {
     {icon: 'aperture', title: 'Timeline', component: TabsPage, index: 4},
   ]
 
+  //
+  loggedInPages: [Object] = [
+    {icon: 'log-out', title: 'Log Out', handler: 'logOutHandler', type: 'handler'},
+  ]
+
+  //
   loggedOutPages: [Object] = [
-    {icon: 'log-in', title: 'Sign In', component: UserSignInPage, type: 'modal'},
+    {icon: 'log-in', title: 'Sign Up', component: UserSignUpPage, type: 'modal'},
     {icon: 'log-in', title: 'Log In', component: UserLogInPage, type: 'modal'},
-    {icon: 'log-out', title: 'Log Out', component: UserLogInPage, type: 'modal'},
   ]
 
 
@@ -47,6 +59,7 @@ export class MyApp {
   constructor(
     private platform: Platform,
     private menuCtrl: MenuController,
+    private events: Events,
     private auth: Auth
   ) {
     this.rootPage = TabsPage;
@@ -56,21 +69,29 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
     });
-  }
 
+    // listen to auth events
+    this.listenToAuthEvents();
 
-  //
-  //
-  ngOnInit() {
-    this.enableMenu(this.auth.isAuth());
+    // set menu
+    this.auth.isAuth().then(isAuth => {
+      this.enableMenu(isAuth);
+    })
+
+    // set user
+    this.setUser();
   }
 
 
   //
   //
   openPage(page: PageObj) {
-    if (page.type) {
+    if (page.type && page.type === 'modal') {
       this.showModal(page.component);
+    } else if (page.type && page.type === 'handler') {
+      if (this[page.handler]) {
+        this[page.handler]();
+      }
     } else {
       if (page.index) {
         this.nav.setRoot(page.component, {tabIndex: page.index});
@@ -78,15 +99,37 @@ export class MyApp {
         this.nav.setRoot(page.component);
       }
     }
+  }
 
-    /*
-    if (page.title === 'Logout') {
-      // Give the menu time to close before changing to logged out
-      setTimeout(() => {
-        this.userData.logout();
-      }, 1000);
-    }
-    */
+
+  //
+  // log out handler
+  logOutHandler() {
+    this.auth.logOut();
+    this.events.publish('auth:loggedOut');
+  }
+
+
+  //
+  //
+  setUser() {
+    this.auth.getUser().then(data => {
+      this.user = data;
+    });
+  }
+
+
+  //
+  //
+  listenToAuthEvents() {
+    this.events.subscribe('auth:loggedIn', () => {
+      this.enableMenu(true);
+      this.setUser();
+    });
+
+    this.events.subscribe('auth:loggedOut', () => {
+      this.enableMenu(false);
+    });
   }
 
 

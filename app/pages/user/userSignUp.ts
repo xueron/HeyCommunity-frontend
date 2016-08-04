@@ -4,16 +4,14 @@ import {NavController, ViewController} from 'ionic-angular';
 import {UserService} from '../../services/user.service';
 import {Auth} from '../../other/Auth.component';
 
-
 @Component({
-  templateUrl: 'build/pages/user/user-logIn.html',
+  templateUrl: 'build/pages/user/user-signUp.html',
   providers: [
     UserService,
   ],
 })
-export class UserLogInPage {
-  //
-  logInModel: {phone?: number, password?: string} = {};
+export class UserSignUpPage {
+  signUpModel: {nickname?: string, phone?: number, password?: string} = {};
 
 
   //
@@ -31,23 +29,22 @@ export class UserLogInPage {
   //
   cancelModal() {
     this.viewCtrl.dismiss();
-    console.log(this.viewCtrl);
   }
 
 
   //
   //
-  logInHandler(ngForm) {
+  signUpHandler(ngForm) {
     let data: Object = {
-      phone: this.logInModel.phone,
-      password: this.logInModel.password,
+      nickname: this.signUpModel.nickname,
+      phone: this.signUpModel.phone,
+      password: this.signUpModel.password,
     };
 
     if (ngForm.valid) {
-      this.userService.logIn(data)
+      this.userService.signUp(data)
       .then(ret => {
         this.auth.logIn(ret);
-        console.log('ret', ret);
         this.viewCtrl.dismiss();
       });
     }
