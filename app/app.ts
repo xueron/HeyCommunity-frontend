@@ -4,8 +4,9 @@ import {StatusBar} from 'ionic-native';
 import {HTTP_PROVIDERS} from '@angular/http';
 
 import {Helper} from './other/helper.component';
-import {Auth} from './other/Auth.component';
+import {Auth} from './other/auth.component';
 import {User} from './models/user.model';
+import {UserService} from './services/user.service';
 
 import {TabsPage} from './pages/tabs/tabs';
 import {UserSignUpPage} from './pages/user/userSignUp';
@@ -22,7 +23,10 @@ interface PageObj {
 }
 
 @Component({
-  templateUrl: 'build/app.html'
+  templateUrl: 'build/app.html',
+  providers: [
+    UserService,
+  ],
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -34,12 +38,15 @@ export class MyApp {
   user: User = {id: 0, nickname: '', phone: ''};
 
   //
+  isAuth: boolean = false;
+
+  //
   appPages: PageObj[] = [
     {icon: 'pulse', title: 'Timeline', component: TabsPage, index: 0},
-    {icon: 'images', title: 'Timeline', component: TabsPage, index: 1},
-    {icon: 'flower', title: 'Timeline', component: TabsPage, index: 2},
-    {icon: 'sunny', title: 'Timeline', component: TabsPage, index: 3},
-    {icon: 'aperture', title: 'Timeline', component: TabsPage, index: 4},
+    {icon: 'images', title: 'Timeline', component: TabsPage, index: 0},
+    {icon: 'flower', title: 'Timeline', component: TabsPage, index: 0},
+    {icon: 'sunny', title: 'Timeline', component: TabsPage, index: 0},
+    {icon: 'aperture', title: 'Timeline', component: TabsPage, index: 0},
   ]
 
   //
@@ -60,6 +67,7 @@ export class MyApp {
     private platform: Platform,
     private menuCtrl: MenuController,
     private events: Events,
+    private userService: UserService,
     private auth: Auth
   ) {
     this.rootPage = TabsPage;
@@ -74,8 +82,9 @@ export class MyApp {
     this.listenToAuthEvents();
 
     // set menu
-    this.auth.isAuth().then(isAuth => {
+    this.auth.getIsAuth().then(isAuth => {
       this.enableMenu(isAuth);
+      this.isAuth = isAuth;
     })
 
     // set user
@@ -105,8 +114,11 @@ export class MyApp {
   //
   // log out handler
   logOutHandler() {
-    this.auth.logOut();
-    this.events.publish('auth:loggedOut');
+    this.userService.logOut()
+    .then(ret => {
+      this.auth.logOut();
+      this.events.publish('auth:loggedOut');
+    });
   }
 
 
