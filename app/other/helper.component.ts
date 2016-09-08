@@ -32,7 +32,7 @@ export class Helper {
   //
   getImg(uri): string {
     if (uri.substring(0, 4) == 'http') {
-      return '/' + uri;
+      return uri;
     } else {
       return 'http://public.hey-community.cn/' + uri;
     }
