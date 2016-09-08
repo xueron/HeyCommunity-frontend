@@ -26,6 +26,6 @@ export class Helper {
   //
   getImg(uri): string {
     return 'http://public.hey-community.cn/' + uri;
-    return '/' + uri;
+    // return '/' + uri;
   }
 }
