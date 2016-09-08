@@ -17,7 +17,13 @@ export class Helper {
     if (this.platform.is('cordova')) {
       return 'http://cloud.hey-community.com/api/' + uri;
     } else {
-      return '/api/' + uri;
+      let api = this.getParameterByName('api')
+
+      if (api) {
+        return 'http://' + api + '/api/' + uri;
+      } else {
+        return '/api/' + uri;
+      }
     }
   }
 
@@ -25,7 +31,20 @@ export class Helper {
   //
   //
   getImg(uri): string {
-    return 'http://public.hey-community.cn/' + uri;
-    // return '/' + uri;
+    if (uri.substring(0, 4) == 'http') {
+      return '/' + uri;
+    } else {
+      return 'http://public.hey-community.cn/' + uri;
+    }
+  }
+
+
+  //
+  //
+  getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+    results = regex.exec(location.search);
+    return results === null ? undefined : decodeURIComponent(results[1].replace(/\+/g, " "));
   }
 }
