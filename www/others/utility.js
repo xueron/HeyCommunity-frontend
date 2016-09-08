@@ -68,7 +68,7 @@ function isWeChatBrowser() {
 //
 //
 function wechatAutoLogin() {
-    if (isWeChatBrowser() && !localStorage.user && getParameterByName('noWeChatOAuth') == undefined) {
+    if (isWeChatBrowser() && (localStorage.is_auth != 'true' && getParameterByName('noWeChatOAuth') != 'true')) {
         location.assign('http://cloud.hey-community.com/api/wechat/o-auth');
     }
 }
