@@ -30,11 +30,16 @@ export class Helper {
 
   //
   //
+  getVideo = this.getImg;
   getImg(uri): string {
     if (uri.substring(0, 4) == 'http') {
       return uri;
     } else {
-      return 'http://public.hey-community.cn/' + uri;
+      if (localStorage.getItem('is_dev') == 'true') {
+        return uri;
+      } else {
+        return 'http://public.hey-community.cn/' + uri;
+      }
     }
   }
 

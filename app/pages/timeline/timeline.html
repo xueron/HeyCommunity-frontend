@@ -38,6 +38,11 @@
     <div class="" *ngIf="item.imgs">
       <img *ngFor="let img of item.imgs" class="photo" src="{{ helper.getImg(img.uri) }}?imageView/2/w/800">
     </div>
+
+    <div class="" *ngIf="item.video">
+      <video width="100%" loop="false" (click)="videoPlay($event)" poster="{{ helper.getVideo(item.poster) }}" src="{{ helper.getVideo(item.video) }}"></video>
+    </div>
+
     <hr>
 
     <ion-card-content (click)="gotoTimelineDetailPage(i)">

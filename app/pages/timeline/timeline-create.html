@@ -24,17 +24,19 @@
     <button dark outline clear (click)="selectImgs()">
       <ion-icon name="images"></ion-icon>
     </button>
-    <button disabled dark outline clear>
+    <button dark outline clear (click)="selectVideo()">
       <ion-icon name="videocam"></ion-icon>
     </button>
-    <button disabled dark outline clear>
-      <ion-icon name="mic"></ion-icon>
-    </button>
   </div>
-  <input #inputImgs [hidden]="!helper.platform.is('ios')" type="file" (change)="uploadImgs($event)" multiple accept="image/*">
+  <input #inputImgs [hidden]="!helper.platform.is('ios')" type="file" (click)="inputImgs.value = null" (change)="uploadImgs($event)" multiple accept="image/*">
+  <input #inputVideo [hidden]="!helper.platform.is('ios')" type="file" (click)="inputVideo.value = null"  (change)="uploadVideo($event)" multiple accept="video/*">
   <hr>
 
   <div class="preview-imgs">
     <img *ngFor="let item of imgs" src="{{ helper.getImg(item.uri) }}?imageView/2/w/100">
+  </div>
+
+  <div class="preview-video" *ngIf="video">
+    <video width="60" (click)="videoPlay($event)" poster="{{ helper.getVideo(video.poster) }}" src="{{ video.uri }}"></video>
   </div>
 </ion-content>

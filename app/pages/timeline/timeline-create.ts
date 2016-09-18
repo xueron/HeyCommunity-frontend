@@ -18,11 +18,15 @@ import {TimelineService} from '../../services/timeline.service';
 })
 export class TimelineCreatePage {
   @ViewChild('inputImgs') inputImgsEl;
+  @ViewChild('inputVideo') inputVideoEl;
 
   newTimeline: {content?: string} = {};
 
   //
   imgs: any;
+
+  //
+  video: any;
 
   //
   imgIdArr: number[] = [];
@@ -49,6 +53,7 @@ export class TimelineCreatePage {
     let data: any = {
       content: ngForm.value.content,
       imgs: JSON.stringify(this.imgIdArr),
+      video: this.video ? this.video.id : null,
     };
 
     this.timelineService.store(data)
@@ -61,8 +66,26 @@ export class TimelineCreatePage {
 
   //
   //
+  videoPlay(event) {
+    if (event.srcElement.paused) {
+      event.srcElement.play();
+    } else {
+      event.srcElement.pause();
+    }
+  }
+
+
+  //
+  //
   selectImgs() {
     this.inputImgsEl.nativeElement.click();
+  }
+
+
+  //
+  //
+  selectVideo() {
+    this.inputVideoEl.nativeElement.click();
   }
 
 
@@ -77,7 +100,22 @@ export class TimelineCreatePage {
       this.imgIdArr = [];     // @todo reset imgIdArr
       for (let i = 0; i < this.imgs.length; i++) {
         this.imgIdArr = this.imgIdArr.concat(this.imgs[i]['id']);
+        this.video = null;
       }
+    });
+  }
+
+
+  //
+  //
+  uploadVideo(event) {
+    let files = event.srcElement.files;
+    this.video = null;
+
+    this.fileUploadService.upload(this.timelineService.timelineStoreVideoAPI, files).then(data => {
+      this.imgs = data.imgs;
+      this.video = data;
+      this.imgIdArr = [];
     });
   }
 }

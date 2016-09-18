@@ -222,6 +222,19 @@
 
 
   //
+  //
+  .preview-video {
+    video {
+      padding-bottom: 6px;
+      padding-left: 6px;
+      display: inline-block;
+      width: 120px;
+      height: 120px;
+    }
+  }
+
+
+  //
   .media-toolbar {
     margin-bottom: -7px;
   }
