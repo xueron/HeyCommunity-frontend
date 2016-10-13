@@ -83615,7 +83615,9 @@ var __metadata$13 = (undefined && undefined.__metadata) || function (k, v) {
 var TimelineCreatePage = (function () {
     //
     // constructor
-    function TimelineCreatePage(helper, utilityComp, timelineService, fileUploadService, navCtrl, viewCtrl) {
+    function TimelineCreatePage(events, renderer, helper, utilityComp, timelineService, fileUploadService, navCtrl, viewCtrl) {
+        this.events = events;
+        this.renderer = renderer;
         this.helper = helper;
         this.utilityComp = utilityComp;
         this.timelineService = timelineService;
@@ -83626,6 +83628,14 @@ var TimelineCreatePage = (function () {
         //
         this.imgIdArr = [];
     }
+    //
+    //
+    TimelineCreatePage.prototype.ngAfterViewChecked = function () {
+        var theThis = this;
+        this.renderer.listen(this.btnImgsEl._elementRef.nativeElement, 'click', function () {
+            theThis.inputImgsEl.nativeElement.click();
+        });
+    };
     //
     // timeline create handler
     TimelineCreatePage.prototype.timelineCreateHandler = function (ngForm) {
@@ -83698,19 +83708,23 @@ var TimelineCreatePage = (function () {
         __metadata$13('design:type', Object)
     ], TimelineCreatePage.prototype, "inputImgsEl", void 0);
     __decorate$120([
+        ViewChild('btnImgs'), 
+        __metadata$13('design:type', Object)
+    ], TimelineCreatePage.prototype, "btnImgsEl", void 0);
+    __decorate$120([
         ViewChild('inputVideo'), 
         __metadata$13('design:type', Object)
     ], TimelineCreatePage.prototype, "inputVideoEl", void 0);
     TimelineCreatePage = __decorate$120([
         Component({
             selector: 'page-timeline-create',
-             template: '<ion-header>\n  <ion-navbar>\n    <ion-buttons start>\n      <button color="grey" ion-button (click)="dismiss()">\n        Close\n      </button>\n    </ion-buttons>\n\n    <ion-title>Timeline Create</ion-title>\n\n    <ion-buttons end>\n      <button color="grey" ion-button (click)="timelineCreateHandler(timelineCreateForm)">\n        Send\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n  <ion-list id="section-textarea">\n    <form #timelineCreateForm="ngForm" novalidate>\n        <ion-item>\n          <ion-textarea [(ngModel)]="newTimeline.content" name="content" rows="8" placeholder="What is new">\n          </ion-textarea>\n        </ion-item>\n    </form>\n  </ion-list>\n\n  <div class="media-toolbar">\n    <button color="dark" ion-button icon-only outline clear (click)="selectImgs()">\n      <ion-icon name="images"></ion-icon>\n    </button>\n    <button color="dark" ion-button icon-only disabled outline clear (click)="selectVideo()">\n      <ion-icon name="videocam"></ion-icon>\n    </button>\n    <button color="dark" ion-button icon-only disabled outline clear (click)="selectImgs()">\n      <ion-icon name="at"></ion-icon>\n    </button>\n    <button color="dark" ion-button icon-only disabled outline clear (click)="selectImgs()">\n      <ion-icon name="locate"></ion-icon>\n    </button>\n  </div>\n  <input #inputImgs [hidden]="!helper.platform.is(\'ios\')" type="file" (click)="inputImgs.value = null" (change)="uploadImgs($event)" multiple accept="image/*">\n  <input #inputVideo [hidden]="!helper.platform.is(\'ios\')" type="file" (click)="inputVideo.value = null"  (change)="uploadVideo($event)" multiple accept="video/*">\n  <hr>\n\n  <div class="preview-imgs">\n    <img *ngFor="let item of imgs" src="{{ helper.getImg(item.uri) }}?imageView/2/w/100">\n  </div>\n\n  <div class="preview-video" *ngIf="video">\n    <video width="60" (click)="videoPlay($event)" poster="{{ helper.getVideo(video.poster) }}" src="{{ video.uri }}"></video>\n  </div>\n</ion-content>\n',
+             template: '<ion-header>\n  <ion-navbar>\n    <ion-buttons start>\n      <button color="grey" ion-button (click)="dismiss()">\n        Close\n      </button>\n    </ion-buttons>\n\n    <ion-title>Timeline Create</ion-title>\n\n    <ion-buttons end>\n      <button color="grey" ion-button (click)="timelineCreateHandler(timelineCreateForm)">\n        Send\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n  <ion-list id="section-textarea">\n    <form #timelineCreateForm="ngForm" novalidate>\n        <ion-item>\n          <ion-textarea [(ngModel)]="newTimeline.content" name="content" rows="8" placeholder="What is new">\n          </ion-textarea>\n        </ion-item>\n    </form>\n  </ion-list>\n\n  <div class="media-toolbar">\n    <button #btnImgs color="dark" ion-button icon-only outline clear>\n      <ion-icon name="images"></ion-icon>\n    </button>\n    <button color="dark" ion-button icon-only disabled outline clear>\n      <ion-icon name="videocam"></ion-icon>\n    </button>\n    <button color="dark" ion-button icon-only disabled outline clear>\n      <ion-icon name="at"></ion-icon>\n    </button>\n    <button color="dark" ion-button icon-only disabled outline clear>\n      <ion-icon name="locate"></ion-icon>\n    </button>\n  </div>\n\n  <div class="">\n    <br>\n    <br>\n    <br>\n    <br>\n    <input #inputImgs type="file" (click)="inputImgs.value = null" (change)="uploadImgs($event)" multiple accept="image/*">\n    <input class="hide" #inputVideo type="file" (click)="inputVideo.value = null"  (change)="uploadVideo($event)" multiple accept="video/*">\n  </div>\n\n  <hr>\n\n  <div class="preview-imgs">\n    <img *ngFor="let item of imgs" src="{{ helper.getImg(item.uri) }}?imageView/2/w/100">\n  </div>\n\n  <div class="preview-video" *ngIf="video">\n    <video width="60" (click)="videoPlay($event)" poster="{{ helper.getVideo(video.poster) }}" src="{{ video.uri }}"></video>\n  </div>\n</ion-content>\n',
             providers: [
                 Nav,
                 FileUploadService,
             ],
         }), 
-        __metadata$13('design:paramtypes', [Helper, UtilityComponent, TimelineService, FileUploadService, NavController, ViewController])
+        __metadata$13('design:paramtypes', [Events, Renderer, Helper, UtilityComponent, TimelineService, FileUploadService, NavController, ViewController])
     ], TimelineCreatePage);
     return TimelineCreatePage;
 }());
