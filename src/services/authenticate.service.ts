@@ -85,10 +85,11 @@ export class AuthenticateService {
   //
   // wechat login
   wechatLogin() {
-    this.getIsAuth();
-    if (!this.isAuth && this.isWeChatBrowser() && this.getParameterByName('noWeChatOAuth') != 'true') {
-      window.location.assign('/api/wechat/o-auth');
-    }
+    this.getIsAuth().then(() => {
+      if (!this.isAuth && this.isWeChatBrowser() && this.getParameterByName('noWeChatOAuth') != 'true') {
+        window.location.assign('/api/wechat/o-auth');
+      }
+    });
   }
 
 
