@@ -10,12 +10,12 @@
 
       <ion-col id="section-btns" text-right>
         <ion-buttons>
-          <button *ngIf="authService.isAuth" class="hide" ion-button clear icon-only color="grey">
-            <ion-icon name="image"></ion-icon>
+          <button ion-button clear icon-only color="grey" [navPush]="MeSettingPage">
+            <ion-icon name="cog"></ion-icon>
           </button>
 
-          <button *ngIf="authService.isAuth" ion-button clear icon-only color="grey" [navPush]="MeSettingPage">
-            <ion-icon name="cog"></ion-icon>
+          <button *ngIf="authService.isAuth" ion-button clear icon-only color="grey" (click)="gotoMeProfilePage()">
+            <ion-icon name="information-circle"></ion-icon>
           </button>
         </ion-buttons>
       </ion-col>
@@ -46,7 +46,7 @@
     <button ion-item (click)="gotoMeNoticePage()">
       <ion-icon name="notifications" item-left></ion-icon>
       Notices
-      <ion-badge class="hide" light item-right color="danger">10</ion-badge>
+      <ion-badge light item-right color="{{ noticeService.noCheckNotices.length ? 'danger' : 'grey' }}">{{ noticeService.noCheckNotices.length }}</ion-badge>
     </button>
 
     <button ion-item (click)="gotoMeTimelinePage()">

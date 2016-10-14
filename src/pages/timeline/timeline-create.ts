@@ -1,5 +1,5 @@
 import { Component, ViewChild, Renderer } from '@angular/core';
-import { NavController, ViewController, Nav, NavParams, Events } from 'ionic-angular';
+import { NavController, ViewController, Nav, Events } from 'ionic-angular';
 
 import { Helper } from '../../other/helper';
 import { UtilityComponent } from '../../pages/component/utility';
@@ -20,7 +20,6 @@ import { Timeline } from '../../models/timeline.model';
 })
 export class TimelineCreatePage {
   @ViewChild('inputImgs') inputImgsEl;
-  @ViewChild('btnImgs') btnImgsEl;
   @ViewChild('inputVideo') inputVideoEl;
 
   newTimeline: {content?: string} = {};
@@ -49,16 +48,6 @@ export class TimelineCreatePage {
     public navCtrl: NavController,
     public viewCtrl: ViewController
   ) {
-  }
-
-
-  //
-  //
-  ngAfterViewChecked() {
-    let theThis = this;
-    this.renderer.listen(this.btnImgsEl._elementRef.nativeElement, 'click', function() {
-      theThis.inputImgsEl.nativeElement.click();
-    });
   }
 
 

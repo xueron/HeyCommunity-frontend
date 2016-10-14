@@ -45,3 +45,19 @@ ion-footer {
     text-align: center;
 }
 
+
+
+//
+//
+// ------------------------------------
+.hc-toast {
+  .toast-wrapper  {
+    background-color: color($colors, grey) !important;
+  }
+}
+
+.no-badge {
+  ion-badge {
+    display: none;
+  }
+}

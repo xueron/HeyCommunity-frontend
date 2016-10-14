@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, Events } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
-import { AuthenticateService } from '../services/authenticate.service';
-import { UserService } from '../services/user.service';
+import { NoticeService } from '../services/notice.service';
 
 import { TabsPage } from '../pages/tabs/tabs';
 // import { TutorialPage } from '../pages/tutorial/tutorial';
@@ -13,6 +12,8 @@ import { TabsPage } from '../pages/tabs/tabs';
   template: `<ion-nav [root]="rootPage" swipeBackEnabled="true"></ion-nav>`
 })
 export class MyApp {
+  noticeInterval: any;
+
   rootPage = TabsPage;
   // rootPage = TutorialPage;
 
@@ -20,30 +21,33 @@ export class MyApp {
   //
   // constructor
   constructor(
-    public platform: Platform,
-    public userService: UserService,
-    public authService: AuthenticateService
+    public events: Events,
+    public noticeService: NoticeService,
+    public platform: Platform
   ) {
     platform.ready().then(() => {
+      console.log('Hey Community ~');
+
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
     });
-  }
 
+    //
+    this.events.subscribe('auth:loggedIn', () => {
+      console.log('user is logged-in');
 
-  //
-  //
-  ngAfterViewInit() {
-    // get user
-    this.userService.getUser().then(data => {
-      this.authService.logIn(data);
-    }, data => {
-      this.authService.logOut();
+      this.noticeInterval = setInterval(() => {
+        this.noticeService.getIndex();
+      }, 15000);
     });
 
-    // get notices
+    //
+    this.events.subscribe('auth:loggedOut', () => {
+      console.log('user is logged-out');
+
+      clearInterval(this.noticeInterval);
+    });
+
   }
-
-
 }
