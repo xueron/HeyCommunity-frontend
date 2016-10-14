@@ -3,6 +3,7 @@ import { Platform, Events } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
 import { NoticeService } from '../services/notice.service';
+import { AuthenticateService } from '../services/authenticate.service';
 
 import { TabsPage } from '../pages/tabs/tabs';
 // import { TutorialPage } from '../pages/tutorial/tutorial';
@@ -22,6 +23,7 @@ export class MyApp {
   // constructor
   constructor(
     public events: Events,
+    public authService: AuthenticateService,
     public noticeService: NoticeService,
     public platform: Platform
   ) {
@@ -32,6 +34,9 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
     });
+
+    //
+    this.authService.wechatLogin();
 
     //
     this.events.subscribe('auth:loggedIn', () => {
