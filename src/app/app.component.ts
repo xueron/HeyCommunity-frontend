@@ -3,6 +3,10 @@ import { Platform, Events } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 import { TranslateService } from 'ng2-translate';
 
+import moment from 'moment';
+import 'moment/src/locale/zh-cn';
+import 'moment/src/locale/en-gb';
+
 import { NoticeService } from '../services/notice.service';
 import { AuthenticateService } from '../services/authenticate.service';
 
@@ -21,6 +25,7 @@ export class MyApp {
 
   APP_LANGUAGE: string = 'AppLanguage';
 
+
   //
   // constructor
   constructor(
@@ -30,6 +35,10 @@ export class MyApp {
     public noticeService: NoticeService,
     public platform: Platform
   ) {
+    //
+    moment.locale('en-gb');
+
+    //
     platform.ready().then(() => {
       console.log('Hey Community ~');
 
@@ -41,13 +50,22 @@ export class MyApp {
       // get app language
       if (window.localStorage.hasOwnProperty(this.APP_LANGUAGE)) {
         let lang = window.localStorage.getItem(this.APP_LANGUAGE);
+        this.events.publish('app:changeLang', lang);
       } else {
-        let lang = window.navigator.userLanguage || window.navigator.language;
-        lang = /^(zh-CN)$/gi.test(lang) ? 'zh-CN' : 'en-US';
-        window.localStorage.setItem(this.APP_LANGUAGE, lang);
+        let lang = window.navigator.language;
+        lang = /^(zh-cn)$/gi.test(lang) ? 'zh-cn' : 'en-gb';
+        this.events.publish('app:changeLang', lang);
       }
+    });
+
+
+    //
+    // subscribe app changeLang
+    this.events.subscribe('app:changeLang', (lang) => {
+      window.localStorage.setItem(this.APP_LANGUAGE, lang);
       this.translateService.setDefaultLang(lang);
       this.translateService.use(lang);
+      moment.locale(lang);
     });
 
 
