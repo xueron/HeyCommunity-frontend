@@ -51,8 +51,8 @@ export class MyApp {
     });
 
 
-    //
-    this.authService.wechatLogin();
+    // wechat auto login dissabled
+    // this.authService.wechatLogin();
 
     // subscribe auth loggedIn
     this.events.subscribe('auth:loggedIn', () => {
