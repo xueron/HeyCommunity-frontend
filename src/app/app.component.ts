@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Platform, Events } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
+import { TranslateService } from 'ng2-translate';
 
 import { NoticeService } from '../services/notice.service';
 import { AuthenticateService } from '../services/authenticate.service';
@@ -18,10 +19,12 @@ export class MyApp {
   rootPage = TabsPage;
   // rootPage = TutorialPage;
 
+  APP_LANGUAGE: string = 'AppLanguage';
 
   //
   // constructor
   constructor(
+    public translateService: TranslateService,
     public events: Events,
     public authService: AuthenticateService,
     public noticeService: NoticeService,
@@ -33,12 +36,25 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
+
+      //
+      // get app language
+      if (window.localStorage.hasOwnProperty(this.APP_LANGUAGE)) {
+        let lang = window.localStorage.getItem(this.APP_LANGUAGE);
+      } else {
+        let lang = window.navigator.userLanguage || window.navigator.language;
+        lang = /^(zh-CN)$/gi.test(lang) ? 'zh-CN' : 'en-US';
+        window.localStorage.setItem(this.APP_LANGUAGE, lang);
+      }
+      this.translateService.setDefaultLang(lang);
+      this.translateService.use(lang);
     });
+
 
     //
     this.authService.wechatLogin();
 
-    //
+    // subscribe auth loggedIn
     this.events.subscribe('auth:loggedIn', () => {
       console.log('user is logged-in');
 
@@ -47,7 +63,9 @@ export class MyApp {
       }, 15000);
     });
 
+
     //
+    // subscribe auth loggedOut
     this.events.subscribe('auth:loggedOut', () => {
       console.log('user is logged-out');
 

@@ -3,16 +3,14 @@ import { NavController } from 'ionic-angular';
 
 
 @Component({
-  selector: 'page-me-avatar',
-  templateUrl: 'me-avatar.html'
+  selector: 'page-me-debug',
+  templateUrl: 'me-debug.html'
 })
-export class MeAvatarPage {
+export class MeDebugPage {
 
 
   //
-  //
+  // constructor
   constructor(public navCtrl: NavController) {
-
   }
-
 }
