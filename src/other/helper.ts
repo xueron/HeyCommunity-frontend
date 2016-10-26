@@ -36,16 +36,8 @@ export class Helper {
   getImg(uri): string {
     if (uri.substring(0, 4) == 'http') {
       return uri;
-    } else if (this.platform.is('cordova')) {
-      return 'http://public.hey-community.cn/' + uri;
     } else {
-      let api = this.getParameterByName('api')
-
-      if (api) {
-        return 'http://' + api + '/' + uri;
-      } else {
-        return uri;
-      }
+      return 'http://public.hey-community.cn/' + uri;
     }
   }
 
