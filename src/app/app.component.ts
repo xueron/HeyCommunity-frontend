@@ -38,6 +38,9 @@ export class MyApp {
     //
     moment.locale('en-gb');
 
+    // clear app loading handler
+    window.clearTimeout((<any>window).appLoadingTid);
+
     //
     platform.ready().then(() => {
       console.log('Hey Community ~');
